@@ -132,7 +132,7 @@ class StopException(Exception):
 class HiddenAction:
     pass
 
-
+#
 def Bind(notification, listener):
     if notification not in eg.notificationHandlers:
         notificationHandler = eg.NotificationHandler()

@@ -358,7 +358,7 @@ class MainFrame(wx.Frame):
         Append("HelpContents", "\tF1")
         menu.AppendSeparator()
         Append("WebHomepage")
-        Append("WebForum")
+        Append("WebForum", "\tF3")
         Append("WebWiki")
         menu.AppendSeparator()
         Append("CheckUpdate")

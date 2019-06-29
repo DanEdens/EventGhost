@@ -54,7 +54,7 @@ class Text:
     class AddButton:
         label = "Label:"
         event = "Event:"
-
+        parse = "Contains Python expression:"
 
 class ButtonType:
     pass
@@ -279,8 +279,23 @@ class AddButton(eg.ActionBase):
     name = "Add Button"
 
     def __call__(self, kwargs):
-        self.plugin.data.append((ButtonType, kwargs))
 
+        label_parse = kwargs.pop("label_parse", False)
+        event_parse = kwargs.pop("event_parse", False)
+
+        if label_parse:
+            try:
+                kwargs['label'] = eg.ParseString(kwargs['label'])
+            except:
+                pass
+
+        if event_parse:
+            try:
+                kwargs['event'] = eg.ParseString(kwargs['event'])
+            except:
+                pass
+
+        self.plugin.data.append((ButtonType, kwargs))
 
     def GetLabel(self, kwargs):
         return self.name + ": " + kwargs.get("label", "")
@@ -290,6 +305,7 @@ class AddButton(eg.ActionBase):
 
         def MakeOption(name, checkBox, ctrl):
             value = kwargs.get(name, None)
+
             def OnCheckBox(event):
                 ctrl.Enable(checkBox.GetValue())
                 event.Skip()
@@ -312,10 +328,16 @@ class AddButton(eg.ActionBase):
         text = self.text
 
         labelCtrl = panel.TextCtrl(kwargs.get("label", ""))
-        panel.AddLine(text.label, labelCtrl)
+        labelParseCtrl = panel.CheckBox(label=text.parse)
+        labelParseCtrl.SetValue(kwargs.get("label_parse", False))
+
+        panel.AddLine(text.label, labelCtrl, labelParseCtrl)
 
         eventCtrl = panel.TextCtrl(kwargs.get("event", ""))
-        panel.AddLine(text.event, eventCtrl)
+        eventParseCtrl = panel.CheckBox(label=text.parse)
+        eventParseCtrl.SetValue(kwargs.get("event_parse", False))
+
+        panel.AddLine(text.event, eventCtrl, eventParseCtrl)
 
         invisibleCtrl = panel.CheckBox(
             kwargs.get("invisible", False),
@@ -370,9 +392,12 @@ class AddButton(eg.ActionBase):
 
         while panel.Affirmed():
             image = kwargs.get("image", None)
-            kwargs = {}
-            kwargs["label"] = labelCtrl.GetValue()
-            kwargs["event"] = eventCtrl.GetValue()
+            kwargs = dict(
+                label=labelCtrl.GetValue(),
+                label_parse=labelParseCtrl.GetValue(),
+                event=eventCtrl.GetValue(),
+                event_parse=eventParseCtrl.GetValue()
+            )
             fontInfo()
             foregroundColour()
             backgroundColour()

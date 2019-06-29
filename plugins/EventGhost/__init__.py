@@ -81,6 +81,7 @@ class EnableItem(eg.ActionBase):
             "Please select another item."
         )
 
+
     def __call__(self, link):
         if link:
             node = link.target
