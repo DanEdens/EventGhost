@@ -26,3 +26,4 @@ Release/
 *.opendb
 *.sdf
 *.VC.db
+plugins/MouseEvent/pyHook/_cpyHook.pyd
