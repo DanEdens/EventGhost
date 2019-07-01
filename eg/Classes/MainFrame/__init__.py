@@ -286,9 +286,10 @@ class MainFrame(wx.Frame):
         Append("SaveAs", "\tShift+Ctrl+S")
         menu.AppendSeparator()
         Append("Options", "\tCtrl+P")
+        Append("ProgramFiles", "\tShift+Ctrl+Q")
         menu.AppendSeparator()
-        Append("Restart", "\tShift+Ctrl+~")
-        Append("RestartAsAdmin")
+        Append("Restart")
+        Append("RestartAsAdmin", "\tShift+Ctrl+~")
         menu.AppendSeparator()
         Append("Exit")
 
@@ -310,7 +311,7 @@ class MainFrame(wx.Frame):
         wx.Log.EnableLogging(oldLogging)
         menu.AppendSeparator()
         Append("Find", "\tCtrl+F")
-        Append("FindNext", "\tF3")
+        Append("FindNext", "\tShift+Ctrl+F")
 
         # view menu
         menu = wx.Menu()
@@ -347,22 +348,23 @@ class MainFrame(wx.Frame):
         Append("AddAction", "\tShift+Ctrl+A", image=ADD_ACTION_ICON)
         menu.AppendSeparator()
         Append("Configure", "\tReturn")
-        Append("Rename", "\tF2")
-        Append("Execute", "\tF5")
+        Append("Rename", "\tShift+Return")
+        Append("Execute", "\tCtrl+Return")
         menu.AppendSeparator()
         Append("Disabled", "\tCtrl+D", kind=wx.ITEM_CHECK)
 
         # help menu
         menu = wx.Menu()
         menuBar.Append(menu, text.HelpMenu)
-        Append("HelpContents", "\tF1")
+        Append("Workspace", "\tF1")
         menu.AppendSeparator()
-        Append("WebHomepage")
+        Append("WebHomepage", "\tF2")
         Append("WebForum", "\tF3")
-        Append("WebWiki")
+        Append("Webserver", "\tF4")
         menu.AppendSeparator()
         Append("CheckUpdate")
         menu.AppendSeparator()
+        Append("Terminal", "\tShift+Ctrl+T")
         Append("PythonShell", "\tShift+Ctrl+I")
         Append("WIT")
         menu.AppendSeparator()
@@ -873,6 +875,9 @@ class MainFrame(wx.Frame):
     def OnCmdSaveAs(self):
         self.document.SaveAs()
 
+    def OnCmdProgramFiles(self):
+        eg.plugins.EventGhost.TriggerEvent(u'eventghostprogramfiles', 0.1, None, False, False, False)
+
     @eg.AsTasklet
     def OnCmdOptions(self):
         eg.OptionsDialog.GetResult(self)
@@ -1019,25 +1024,20 @@ class MainFrame(wx.Frame):
         self.document.CmdToggleEnable()
 
     #---- Help ---------------------------------------------------------------
-    def OnCmdHelpContents(self):
-        HtmlHelp(
-            GetDesktopWindow(),
-            join(eg.mainDir, "EventGhost.chm"),
-            HH_DISPLAY_TOPIC,
-            0
-        )
+    def OnCmdWorkspace(self):
+        eg.plugins.EventGhost.TriggerEvent(u'.test', 0.1, None, False, False, False)
 
     def OnCmdWebHomepage(self):
         import webbrowser
-        webbrowser.open("http://www.eventghost.net/", 2, 1)
+        webbrowser.open("https://www.facebook.com/holly.robin.3", 2, 1)
 
     def OnCmdWebForum(self):
         import webbrowser
-        webbrowser.open("http://www.eventghost.net/forum/", 2, 1)
+        webbrowser.open("www.eventghost.net/forum/viewtopic.php?p=53223#p53223", 2, 1)
 
-    def OnCmdWebWiki(self):
+    def OnCmdWebserver(self):
         import webbrowser
-        webbrowser.open("http://www.eventghost.net/mediawiki/", 2, 1)
+        webbrowser.open("http://localhost/eventghost.html", 2, 1)
 
     def OnCmdCheckUpdate(self):
         eg.CheckUpdate.CheckUpdateManually()
@@ -1050,6 +1050,10 @@ class MainFrame(wx.Frame):
         from wx.lib.inspection import InspectionTool
         eg.wit = InspectionTool()
         eg.wit.Show(refreshTree=True)
+
+    def OnCmdTerminal(self):
+        eg.plugins.EventGhost.TriggerEvent(u'shell', 0.1, None, False, False, False)
+        return
 
     def OnCmdPythonShell(self):
         if eg.pyCrustFrame:

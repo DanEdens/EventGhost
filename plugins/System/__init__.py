@@ -102,15 +102,15 @@ def GetDeviceId_(*args, **kwargs):
     return id.encode(eg.systemEncoding) if not isinstance(id, int) else id
 SoundMixer.GetDeviceId = GetDeviceId_
 
-EVENT_LIST = (
-    ("Idle", None),
-    ("UnIdle", None),
-    ("DriveMounted", None),
-    ("DriveRemoved", None),
-    ("DeviceAttached", None),
-    ("DeviceRemoved", None),
-)
 
+EVENT_LIST = (
+    ("*.", None),
+    ("*.code?", None),
+    ("*.job?", None),
+    ("Main.", None),
+    ("Keyboard.", None),
+    ("*.kill?", None),
+)
 MONITOR_STATES = dict(
     OFF=2,
     STANDBY=1,
