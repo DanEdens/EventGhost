@@ -310,7 +310,7 @@ class MainFrame(wx.Frame):
         wx.Log.EnableLogging(oldLogging)
         menu.AppendSeparator()
         Append("Find", "\tCtrl+F")
-        Append("FindNext")
+        Append("FindNext", "\tF3")
 
         # view menu
         menu = wx.Menu()
@@ -341,29 +341,29 @@ class MainFrame(wx.Frame):
         menu = wx.Menu()
         menuBar.Append(menu, text.ConfigurationMenu)
         Append("AddPlugin", "\tShift+Ctrl+P", image=ADD_PLUGIN_ICON)
-        Append("AddFolder", "\tShift+Ctrl+D", image=ADD_FOLDER_ICON)
+        Append("AddFolder", "\tShift+Ctrl+N", image=ADD_FOLDER_ICON)
         Append("AddMacro", "\tShift+Ctrl+M", image=ADD_MACRO_ICON)
-        Append("AddEvent", "\tShift+Ctrl+Z", image=ADD_EVENT_ICON)
+        Append("AddEvent", "\tShift+Ctrl+E", image=ADD_EVENT_ICON)
         Append("AddAction", "\tShift+Ctrl+A", image=ADD_ACTION_ICON)
         menu.AppendSeparator()
         Append("Configure", "\tReturn")
-        Append("Rename", "\tShift+Return","\tF2")
-        Append("Execute", "\tCtrl+Return","\tF5")
+        Append("Rename", "\tF2")
+        Append("Execute", "\tF5")
         menu.AppendSeparator()
         Append("Disabled", "\tCtrl+D", kind=wx.ITEM_CHECK)
 
         # help menu
         menu = wx.Menu()
         menuBar.Append(menu, text.HelpMenu)
-        Append("Workspace", "\tF1")
+        Append("HelpContents", "\tF1")
         menu.AppendSeparator()
-        Append("Commandline", "\tF2")
+        Append("WebHomepage")
         Append("WebForum", "\tF3")
-        Append("WebMap", "\tF4")
+        Append("WebWiki")
         menu.AppendSeparator()
-        Append("Freshplugins", "\tShift+Ctrl+F1")
+        Append("CheckUpdate")
         menu.AppendSeparator()
-        Append("PythonShell", "\tShift+Ctrl+T")
+        Append("PythonShell", "\tShift+Ctrl+I")
         Append("WIT")
         menu.AppendSeparator()
         Append("About")
@@ -1019,22 +1019,28 @@ class MainFrame(wx.Frame):
         self.document.CmdToggleEnable()
 
     #---- Help ---------------------------------------------------------------
-    def OnCmdWorkspace(self):
-        eg.plugins.EventGhost.TriggerEvent(u'.test', 0.1, None, False, False, False)
+    def OnCmdHelpContents(self):
+        HtmlHelp(
+            GetDesktopWindow(),
+            join(eg.mainDir, "EventGhost.chm"),
+            HH_DISPLAY_TOPIC,
+            0
+        )
 
-    def OnCmdCommandline(self):
-        eg.plugins.EventGhost.TriggerEvent(u'.egcommandline', 0.1, None, False, False, False)
+    def OnCmdWebHomepage(self):
+        import webbrowser
+        webbrowser.open("http://www.eventghost.net/", 2, 1)
 
     def OnCmdWebForum(self):
         import webbrowser
         webbrowser.open("http://www.eventghost.net/forum/", 2, 1)
 
-    def OnCmdWebMap(self):
+    def OnCmdWebWiki(self):
         import webbrowser
-        webbrowser.open("https://app.wisemapping.com/c/maps/855379/edit", 2, 1)
+        webbrowser.open("http://www.eventghost.net/mediawiki/", 2, 1)
 
-    def OnCmdFreshplugins(self):
-        eg.plugins.EventGhost.TriggerEvent(u'.refresh?eg', 0.1, None, False, False, False)
+    def OnCmdCheckUpdate(self):
+        eg.CheckUpdate.CheckUpdateManually()
 
     def OnCmdWIT(self):
         if eg.wit:
@@ -1047,7 +1053,7 @@ class MainFrame(wx.Frame):
 
     def OnCmdPythonShell(self):
         if eg.pyCrustFrame:
-        eg.plugins.EventGhost.TriggerEvent(u'.shell', 0.1, None, False, False, False)
+            eg.pyCrustFrame.Raise()
             return
 
         import wx.py as py
