@@ -323,7 +323,7 @@ class MainFrame(wx.Frame):
         Append("ExpandChilds", image=GetInternalBitmap("expand_children"))
         Append("CollapseChilds", image=GetInternalBitmap("collapse_children"))
         Append("ExpandAll", image=GetInternalBitmap("expand_all"))
-        Append("CollapseAll", image=GetInternalBitmap("collapse_all"))
+        Append("CollapseAll", "\tShift+Ctrl+Home", image=GetInternalBitmap("collapse_all"))
         menu.AppendSeparator()
         item = Append("ExpandOnEvents", kind=wx.ITEM_CHECK)
         item.Check(Config.expandOnEvents)
@@ -352,6 +352,25 @@ class MainFrame(wx.Frame):
         Append("Execute", "\tCtrl+Return")
         menu.AppendSeparator()
         Append("Disabled", "\tCtrl+D", kind=wx.ITEM_CHECK)
+
+        # build menu
+        menu = wx.Menu()
+        menuBar.Append(menu, text.BuildMenu)
+        Append("ColorCodes")
+        menu.AppendSeparator()
+        Append("IconLibrary")
+
+        # build menu
+        menu = wx.Menu()
+        menuBar.Append(menu, text.JobMenu)
+        Append("JobSelector")
+        menu.AppendSeparator()
+        Append("Vortex")
+        Append("Sharepoint")
+        Append("Certify")
+        Append("ScreenConnect")
+        menu.AppendSeparator()
+        Append("Quickview")
 
         # help menu
         menu = wx.Menu()
@@ -1022,6 +1041,41 @@ class MainFrame(wx.Frame):
 
     def OnCmdDisabled(self):
         self.document.CmdToggleEnable()
+
+    #----Build---------------------------------------------------------------
+
+    def OnCmdColorCodes(self):
+        import webbrowser
+        webbrowser.open("https://htmlcolorcodes.com", 2, 1)
+
+    def OnCmdIconLibrary(self):
+        import webbrowser
+        webbrowser.open("https://icons8.com/icons", 2, 1)
+
+    #----job---------------------------------------------------------------
+
+    def OnCmdJobSelector(self):
+        eg.plugins.EventGhost.TriggerEvent(u'job_selector', 0.1, None, False, False, False)
+
+    def OnCmdVortex(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
+
+    def OnCmdSharepoint(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
+
+    def OnCmdCertify(self):
+        import webbrowser
+        webbrowser.open("https://www.certify.com/Home2.aspx?reload=1", 2, 1)
+
+    def OnCmdScreenConnect(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
+
+    def OnCmdQuickview(self):
+        import webbrowser
+        webbrowser.open("http://quickview.geo-instruments.com", 2, 1)
 
     #---- Help ---------------------------------------------------------------
     def OnCmdWorkspace(self):

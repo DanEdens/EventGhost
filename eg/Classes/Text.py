@@ -161,6 +161,18 @@ class Default:
             Execute = "Execute Item"
             Disabled = "Disable Item"
 
+            BuildMenu = "&Build"
+            ColorCodes = "ColorCodes"
+            IconLibrary = "IconLibrary"
+
+            JobMenu = "&Jobname"
+            JobSelector = "Job Select &Remote"
+            Vortex = "&Vortex"
+            Sharepoint = "Share&point"
+            Certify = "&Certify"
+            ScreenConnect = "Screen&Connect"
+            Quickview = "&Quickview"
+
             HelpMenu = "&Help"
             HelpContents = "&Help Contents"
             WebHomepage = "Home &Page"

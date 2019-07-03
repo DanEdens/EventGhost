@@ -27,3 +27,6 @@ Release/
 *.sdf
 *.VC.db
 plugins/MouseEvent/pyHook/_cpyHook.pyd
+*.png
+*.html
+Webserver/Favorites.zip
