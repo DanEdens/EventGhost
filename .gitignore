@@ -31,3 +31,4 @@ plugins/MouseEvent/pyHook/_cpyHook.pyd
 *.html
 Webserver/Favorites.zip
 plugins/Extended Clipboard/_init_.py
+vimproc.vim/

@@ -164,6 +164,12 @@ class Default:
             BuildMenu = "&Build"
             ColorCodes = "ColorCodes"
             IconLibrary = "IconLibrary"
+            ScriptsmMenu = "Scripts"
+            Script1 = "L&1"
+            Script2 = "L&2"
+            Script3 = "L&3"
+            Script4 = "L&4"
+            FlaskDoc = "Flask Documentation"
 
             JobMenu = "&Jobname"
             JobSelector = "Job Select &Remote"
@@ -171,6 +177,10 @@ class Default:
             Sharepoint = "Share&point"
             Certify = "&Certify"
             ScreenConnect = "Screen&Connect"
+            AmpsmMenu = "&Amp Sites"
+            AmpCap = "Captiol"
+            AmpAudi = "Audi"
+            AmpRedbeach = "Redbeach"
             Quickview = "&Quickview"
 
             HelpMenu = "&Help"

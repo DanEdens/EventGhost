@@ -355,12 +355,28 @@ class MainFrame(wx.Frame):
 
         # build menu
         menu = wx.Menu()
+        Append("Script1")
+        Append("Script2")
+        Append("Script3")
+        Append("Script4")
+        subm = menu
+        menu = wx.Menu()
         menuBar.Append(menu, text.BuildMenu)
         Append("ColorCodes")
-        menu.AppendSeparator()
         Append("IconLibrary")
+        menu.AppendSeparator()
+        menu.AppendMenu(wx.ID_ANY, text=text.ScriptsmMenu, submenu=subm)
+        menu.AppendSeparator()
+        Append("FlaskDoc")
+        Append("ScptransferDoc")
+
 
         # build menu
+        #menu = wx.Menu()
+        #Append("AmpCap")
+        #Append("AmpAudi")
+        #Append("AmpRedbeach")
+        #subm = menu
         menu = wx.Menu()
         menuBar.Append(menu, text.JobMenu)
         Append("JobSelector")
@@ -370,6 +386,8 @@ class MainFrame(wx.Frame):
         Append("Certify")
         Append("ScreenConnect")
         menu.AppendSeparator()
+        #menu.AppendMenu(wx.ID_ANY, text=text.AmpsmMenu, submenu=subm)
+        #menu.AppendSeparator()
         Append("Quickview")
 
         # help menu
@@ -1044,6 +1062,18 @@ class MainFrame(wx.Frame):
 
     #----Build---------------------------------------------------------------
 
+    def OnCmdScript1(self):
+        return
+
+    def OnCmdScript2(self):
+        return
+
+    def OnCmdScript3(self):
+        return
+
+    def OnCmdScript4(self):
+        return
+
     def OnCmdColorCodes(self):
         import webbrowser
         webbrowser.open("https://htmlcolorcodes.com", 2, 1)
@@ -1051,6 +1081,14 @@ class MainFrame(wx.Frame):
     def OnCmdIconLibrary(self):
         import webbrowser
         webbrowser.open("https://icons8.com/icons", 2, 1)
+
+    def OnCmdFlaskDoc(self):
+        import webbrowser
+        webbrowser.open("http://flask.pocoo.org/docs/1.0/", 2, 1)
+
+    def OnCmdScptransferDoc(self):
+        import webbrowser
+        webbrowser.open("http://www.hypexr.org/linux_scp_help.php", 2, 1)
 
     #----job---------------------------------------------------------------
 
