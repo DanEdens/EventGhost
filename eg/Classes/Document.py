@@ -485,6 +485,33 @@ class Document(object):
                 if self.frame is None:
                     self.frame = eg.mainFrame = eg.MainFrame(self)
                     self.frame.Show()
+
+                    def iter_child(parent):
+                        try:
+                            for child in parent.GetChildren():
+                                child.SetBackgroundColour(
+                                    wx.Colour(60, 60, 60)
+                                )
+
+                                child.SetForegroundColour(
+                                    wx.Colour(195, 195, 195)
+                                )
+                                iter_child(child)
+
+                        except:
+                            pass
+
+                    iter_child(eg.mainFrame)
+                    from .MainFrame.LogCtrl import _create_colour_attributes
+
+                    eg.mainFrame.logCtrl.logColours = _create_colour_attributes(
+                        (195, 195, 195),
+                        (60, 60, 60)
+                    )
+
+                    eg.mainFrame.logCtrl.Refresh()
+                    eg.mainFrame.logCtrl.Update()
+
                 else:
                     self.frame.Raise()
                 event.set()

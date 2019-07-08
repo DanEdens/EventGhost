@@ -40,16 +40,16 @@ class Colour:
 
     These might get configurable in the future.
     """
-    windowText = wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOWTEXT).Get()
-    windowBackground = wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOW).Get()
+    windowText = (255, 255, 0)
+    windowBackground = (0, 0, 0)
     treeItem = windowText
     pluginError = (255, 0, 0)
-    errorText = (0, 0, 0)
-    errorBackground = (255, 130, 130)
+    errorText = (53, 33, 33)
+    errorBackground = (255, 255, 255)
     warningText = (0, 0, 0)
     waningBackground = (255, 246, 110)
-    debugText = (0, 0, 0)
-    debugBackground = (165, 217, 255)
+    debugText = (255, 255, 255)
+    debugBackground = (13, 33, 2)
     activeCaption = GetWinSysColour(COLOR_ACTIVECAPTION)
     activeCaptionGradient = GetWinSysColour(COLOR_GRADIENTACTIVECAPTION)
     activeCaptionTextColour = GetWinSysColour(COLOR_CAPTIONTEXT)

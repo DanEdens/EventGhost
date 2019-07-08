@@ -185,8 +185,8 @@ class PythonEditorCtrl(StyledTextCtrl):
         # Triple quotes
         #StyleSetSpec(STC_P_TRIPLE, 'fore:#800080,back:#FFFFEA')
         #StyleSetSpec(STC_P_TRIPLEDOUBLE, 'fore:#800080,back:#FFFFEA')
-        StyleSetSpec(STC_P_TRIPLE, 'fore:#808000')
-        StyleSetSpec(STC_P_TRIPLEDOUBLE, 'fore:#808000')
+        StyleSetSpec(STC_P_TRIPLE, 'fore:#0a8000')
+        StyleSetSpec(STC_P_TRIPLEDOUBLE, 'fore:#0a8000')
         # Class names
         StyleSetSpec(STC_P_CLASSNAME, 'fore:#0000FF,bold')
         # Function names

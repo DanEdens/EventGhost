@@ -108,6 +108,24 @@ class TaskletDialog(wx.Dialog, eg.ControlProviderMixin):
         self.setupFinished = True
         self.Center()
         eg.Utils.EnsureVisible(self)
+
+        def iter_child(parent):
+            try:
+                for child in parent.GetChildren():
+                    child.SetBackgroundColour(
+                        wx.Colour(60, 60, 60)
+                    )
+
+                    child.SetForegroundColour(
+                        wx.Colour(195, 195, 195)
+                    )
+                    iter_child(child)
+
+            except:
+                pass
+
+        iter_child(self)
+
         self.Show()
 
     @eg.LogItWithReturn

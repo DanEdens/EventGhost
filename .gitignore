@@ -26,3 +26,9 @@ Release/
 *.opendb
 *.sdf
 *.VC.db
+plugins/MouseEvent/pyHook/_cpyHook.pyd
+*.png
+*.html
+Webserver/Favorites.zip
+plugins/Extended Clipboard/_init_.py
+vimproc.vim/

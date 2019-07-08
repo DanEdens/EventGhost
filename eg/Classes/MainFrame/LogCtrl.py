@@ -71,20 +71,24 @@ class LogCtrl(wx.ListCtrl):
         self.SetImageList(eg.Icons.gImageList, wx.IMAGE_LIST_SMALL)
 
         self.logColours = _create_colour_attributes(
-            eg.colour.windowText,
-            eg.colour.windowBackground
+            eg.colour.windowBackground,
+            eg.colour.windowText
+
         )
         self.errorColours = _create_colour_attributes(
-            eg.colour.errorText,
-            eg.colour.errorBackground
+            eg.colour.errorBackground,
+            eg.colour.errorText
+
         )
         self.debugColours = _create_colour_attributes(
-            eg.colour.debugText,
-            eg.colour.debugBackground
+            eg.colour.debugBackground,
+            eg.colour.debugText
+
         )
         self.warningColours = _create_colour_attributes(
-            eg.colour.warningText,
-            eg.colour.waningBackground
+            eg.colour.waningBackground,
+            eg.colour.warningText
+
         )
 
         self.InsertColumn(0, "")
