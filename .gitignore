@@ -1,11 +1,5 @@
-# Build output
-
-
 # IDE storage
 
-
-
-# Visual Studio
 .vs/
 Debug/
 Release/
@@ -16,3 +10,15 @@ plugins/MouseEvent/pyHook/_cpyHook.pyd
 vimproc.vim/
 EventGhost.exe.log
 *.pyc
+.idea/EventGhost.iml
+.idea/inspectionProfiles/Project_Default.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
+eg/.idea/eg.iml
+eg/.idea/inspectionProfiles/Project_Default.xml
+eg/.idea/misc.xml
+eg/.idea/modules.xml
+eg/.idea/vcs.xml
+eg/.idea/workspace.xml
