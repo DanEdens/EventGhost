@@ -48,7 +48,7 @@ def Domain():
     return NameSamCompatible().split('\\')[0]
 
 
-def Groups(user_name="KELLERAMERICAS\Dan.Edens", server=None):
+def Groups(user_name=Name(), server=None):
     """
     Retrieves direct and indirect group name the username is a member of for a
     specific computer/server. If no parameters are passed it will default to
@@ -58,7 +58,10 @@ def Groups(user_name="KELLERAMERICAS\Dan.Edens", server=None):
     :type server: str
     :rtype: list
     """
-    return win32net.NetUserGetLocalGroups(server, user_name)
+    try:
+        return win32net.NetUserGetLocalGroups(server, user_name)
+    except:
+        return []
 
 
 def IsDomainLogin():
