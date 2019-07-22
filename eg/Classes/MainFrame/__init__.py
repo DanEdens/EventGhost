@@ -348,7 +348,7 @@ class MainFrame(wx.Frame):
         Append("AddAction", "\tShift+Ctrl+A", image=ADD_ACTION_ICON)
         menu.AppendSeparator()
         Append("Configure", "\tReturn")
-        Append("Rename", "\tShift+Return")
+        Append("Rename", "\tF2")
         Append("Execute", "\tCtrl+Return")
         menu.AppendSeparator()
         Append("Disabled", "\tCtrl+D", kind=wx.ITEM_CHECK)
@@ -368,6 +368,7 @@ class MainFrame(wx.Frame):
         menu.AppendMenu(wx.ID_ANY, text=text.ScriptsmMenu, submenu=subm)
         menu.AppendSeparator()
         Append("FlaskDoc")
+        Append("Wxdoc")
         Append("ScptransferDoc")
 
 
@@ -380,6 +381,7 @@ class MainFrame(wx.Frame):
         menu = wx.Menu()
         menuBar.Append(menu, text.JobMenu)
         Append("JobSelector")
+        Append("Alarmtools")
         menu.AppendSeparator()
         Append("Vortex")
         Append("Sharepoint")
@@ -395,7 +397,7 @@ class MainFrame(wx.Frame):
         menuBar.Append(menu, text.HelpMenu)
         Append("Workspace", "\tF1")
         menu.AppendSeparator()
-        Append("WebHomepage", "\tF2")
+        Append("WebHomepage", "\tF7")
         Append("WebForum", "\tF3")
         Append("Webserver", "\tF4")
         menu.AppendSeparator()
@@ -1090,10 +1092,21 @@ class MainFrame(wx.Frame):
         import webbrowser
         webbrowser.open("http://www.hypexr.org/linux_scp_help.php", 2, 1)
 
+    def OnCmdRegextool(self):
+        import webbrowser
+        webbrowser.open("https://regex101.com/", 2, 1)
+
+    def OnCmdWxdoc(self):
+        import webbrowser
+        webbrowser.open("https://regex101.com/", 2, 1)
+
     #----job---------------------------------------------------------------
 
     def OnCmdJobSelector(self):
         eg.plugins.EventGhost.TriggerEvent(u'job_selector', 0.1, None, False, False, False)
+
+    def OnCmdAlarmtools(self):
+        eg.plugins.EventGhost.TriggerEvent(u'alarm_tools', 0.1, None, False, False, False)
 
     def OnCmdVortex(self):
         import webbrowser
@@ -1109,7 +1122,7 @@ class MainFrame(wx.Frame):
 
     def OnCmdScreenConnect(self):
         import webbrowser
-        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
+        webbrowser.open("https://geoinstruments.screenconnect.com/Host#Access/All%20Machines//309827cc-7d23-42f4-8fd0-52e8ed5c4328", 2, 1)
 
     def OnCmdQuickview(self):
         import webbrowser

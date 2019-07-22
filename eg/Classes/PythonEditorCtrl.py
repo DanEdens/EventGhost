@@ -229,6 +229,7 @@ class PythonEditorCtrl(StyledTextCtrl):
             return menu.Append(menuId, getattr(text, ident, ident))
 
         AddMenuItem("Undo", wx.ID_UNDO)
+        AddMenuItem("Codeselect", wx.ID_ANY)
         AddMenuItem("Redo", wx.ID_REDO)
         menu.AppendSeparator()
         AddMenuItem("Cut", wx.ID_CUT)
@@ -382,6 +383,9 @@ class PythonEditorCtrl(StyledTextCtrl):
 
     def OnCmdCopy(self, dummyEvent=None):
         self.Copy()
+
+    def OnCmdCodeselect(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'code_seletor', 0.1, None, False, False, False)
 
     def OnCmdCut(self, dummyEvent=None):
         self.Cut()

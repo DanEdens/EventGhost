@@ -163,6 +163,8 @@ class Default:
 
             BuildMenu = "&Build"
             ColorCodes = "ColorCodes"
+            Regextool = "Regex"
+            Wxdoc = "wxPython Documentation"
             IconLibrary = "IconLibrary"
             ScriptsmMenu = "Scripts"
             Script1 = "L&1"
@@ -173,6 +175,7 @@ class Default:
 
             JobMenu = "&Jobname"
             JobSelector = "Job Select &Remote"
+            Alarmtools = "Alarm Toolkit"
             Vortex = "&Vortex"
             Sharepoint = "Share&point"
             Certify = "&Certify"
