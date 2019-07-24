@@ -203,6 +203,13 @@ class Default:
             Replay = "&Replay"
             Reset = "&Reset"
 
+            CodesmMenu = "Code Blocks..."
+            Code1 = "c1"
+            Code2 = "c2"
+            Code3 = "c3"
+            Code4 = "c4"
+            Code5 = "c5"
+
         class SaveChanges:
             mesg = (
                 "Configuration contains unsaved changes.\n\n"
