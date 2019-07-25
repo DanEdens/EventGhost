@@ -200,6 +200,17 @@ class Default:
             Replay = "&Replay"
             Reset = "&Reset"
 
+<<<<<<< Updated upstream
+=======
+            CodesmMenu = "Code Blocks..."
+            Incrementer = "Paste - Increment"
+            Code1 = "c1"
+            Code2 = "c2"
+            Code3 = "c3"
+            Code4 = "c4"
+            Code5 = "c5"
+
+>>>>>>> Stashed changes
         class SaveChanges:
             mesg = (
                 "Configuration contains unsaved changes.\n\n"

@@ -234,6 +234,7 @@ class PythonEditorCtrl(StyledTextCtrl):
         AddMenuItem("Cut", wx.ID_CUT)
         AddMenuItem("Copy", wx.ID_COPY)
         AddMenuItem("Paste", wx.ID_PASTE)
+        AddMenuItem("Incrementer", wx.ID_ANY)
         AddMenuItem("Delete", wx.ID_DELETE)
         menu.AppendSeparator()
         AddMenuItem("SelectAll", wx.ID_SELECTALL)
@@ -383,6 +384,30 @@ class PythonEditorCtrl(StyledTextCtrl):
     def OnCmdCopy(self, dummyEvent=None):
         self.Copy()
 
+<<<<<<< Updated upstream
+=======
+    def OnCmdCodeselect(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'code_seletor', 0.1, None, False, False, False)
+
+    def OnCmdIncrementer(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'math_paste_incremente', 0.1, None, False, False, False)
+
+    def OnCmdCode1(self):
+        return
+
+    def OnCmdCode2(self):
+        return
+
+    def OnCmdCode3(self):
+        return
+
+    def OnCmdCode4(self):
+        return
+
+    def OnCmdCode5(self):
+        return
+
+>>>>>>> Stashed changes
     def OnCmdCut(self, dummyEvent=None):
         self.Cut()
 
