@@ -228,8 +228,16 @@ class PythonEditorCtrl(StyledTextCtrl):
             self.Bind(wx.EVT_MENU, getattr(self, "OnCmd" + ident), id=menuId)
             return menu.Append(menuId, getattr(text, ident, ident))
 
+        menu = wx.Menu()
+        AddMenuItem("Code1", wx.ID_ANY)
+        AddMenuItem("Code2", wx.ID_ANY)
+        AddMenuItem("Code3", wx.ID_ANY)
+        AddMenuItem("Code4", wx.ID_ANY)
+        subm = menu
+        menu = wx.Menu()
         AddMenuItem("Undo", wx.ID_UNDO)
         AddMenuItem("Codeselect", wx.ID_ANY)
+        menu.AppendMenu(wx.ID_ANY, text=text.CodesmMenu, submenu=subm)
         AddMenuItem("Redo", wx.ID_REDO)
         menu.AppendSeparator()
         AddMenuItem("Cut", wx.ID_CUT)
