@@ -163,8 +163,6 @@ class Default:
 
             BuildMenu = "&Build"
             ColorCodes = "ColorCodes"
-            Regextool = "Regex"
-            Wxdoc = "wxPython Documentation"
             IconLibrary = "IconLibrary"
             ScriptsmMenu = "Scripts"
             Script1 = "L&1"
@@ -175,7 +173,6 @@ class Default:
 
             JobMenu = "&Jobname"
             JobSelector = "Job Select &Remote"
-            Alarmtools = "Alarm Toolkit"
             Vortex = "&Vortex"
             Sharepoint = "Share&point"
             Certify = "&Certify"
@@ -203,13 +200,17 @@ class Default:
             Replay = "&Replay"
             Reset = "&Reset"
 
+<<<<<<< Updated upstream
+=======
             CodesmMenu = "Code Blocks..."
+            Incrementer = "Paste - Increment"
             Code1 = "c1"
             Code2 = "c2"
             Code3 = "c3"
             Code4 = "c4"
             Code5 = "c5"
 
+>>>>>>> Stashed changes
         class SaveChanges:
             mesg = (
                 "Configuration contains unsaved changes.\n\n"

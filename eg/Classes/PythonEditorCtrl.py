@@ -125,39 +125,34 @@ class PythonEditorCtrl(StyledTextCtrl):
         # and now set up the fold markers
         MarkerDefine = self.MarkerDefine  #IGNORE:C0103
         MarkerDefine(
-            #STC_MARKNUM_FOLDEREND, STC_MARK_BOXPLUSCONNECTED, "black", "white"
             STC_MARKNUM_FOLDEREND, STC_MARK_BOXPLUSCONNECTED, "white", "black"
         )
         MarkerDefine(
-            STC_MARKNUM_FOLDEROPENMID, STC_MARK_BOXMINUSCONNECTED, "white", "black"
-            #STC_MARKNUM_FOLDEROPENMID, STC_MARK_BOXMINUSCONNECTED, "black", "black"
+            STC_MARKNUM_FOLDEROPENMID,
+            STC_MARK_BOXMINUSCONNECTED,
+            "white",
+            "black"
         )
         MarkerDefine(
-            STC_MARKNUM_FOLDERMIDTAIL, STC_MARK_TCORNER, "black", "black"
-            #STC_MARKNUM_FOLDERMIDTAIL, STC_MARK_TCORNER, "white", "black"
+            STC_MARKNUM_FOLDERMIDTAIL, STC_MARK_TCORNER, "white", "black"
         )
         MarkerDefine(
-            STC_MARKNUM_FOLDERTAIL, STC_MARK_LCORNER, "black", "black"
-            #STC_MARKNUM_FOLDERTAIL, STC_MARK_LCORNER, "white", "black"
+            STC_MARKNUM_FOLDERTAIL, STC_MARK_LCORNER, "white", "black"
         )
         MarkerDefine(
-            #STC_MARKNUM_FOLDERSUB, STC_MARK_VLINE, "black", "white"
             STC_MARKNUM_FOLDERSUB, STC_MARK_VLINE, "white", "black"
         )
         MarkerDefine(
-            STC_MARKNUM_FOLDER, STC_MARK_BOXPLUS, "black", "white"
-            #STC_MARKNUM_FOLDER, STC_MARK_BOXPLUS, "white", "black"
+            STC_MARKNUM_FOLDER, STC_MARK_BOXPLUS, "white", "black"
         )
         MarkerDefine(
-            #STC_MARKNUM_FOLDEROPEN, STC_MARK_BOXMINUS, "black", "white"
             STC_MARKNUM_FOLDEROPEN, STC_MARK_BOXMINUS, "white", "black"
         )
 
         # Global default style
         StyleSetSpec(
             STC_STYLE_DEFAULT,
-            'fore:#FFFFFF,back:#000000,face:Courier New,size:9'
-            #'fore:#000000,back:#FFFFFF,face:Courier New,size:9'
+            'fore:#000000,back:#FFFFFF,face:Courier New,size:9'
         )
 
         # Clear styles and revert to default.
@@ -167,20 +162,16 @@ class PythonEditorCtrl(StyledTextCtrl):
         # The rest remains unchanged.
 
         # Line numbers in margin
-        StyleSetSpec(STC_STYLE_LINENUMBER, 'fore:#99A9C2,back:#000000')
-        #StyleSetSpec(STC_STYLE_LINENUMBER, 'fore:#000000,back:#99A9C2')
+        StyleSetSpec(STC_STYLE_LINENUMBER, 'fore:#000000,back:#99A9C2')
         # Highlighted brace
-        StyleSetSpec(STC_STYLE_BRACELIGHT, 'fore:#FFFF00,back:#00009D')
-        #StyleSetSpec(STC_STYLE_BRACELIGHT, 'fore:#00009D,back:#FFFF00')
+        StyleSetSpec(STC_STYLE_BRACELIGHT, 'fore:#00009D,back:#FFFF00')
         # Unmatched brace
-        StyleSetSpec(STC_STYLE_BRACEBAD, 'fore:#FF0000,back:#00009D')
-        #StyleSetSpec(STC_STYLE_BRACEBAD, 'fore:#00009D,back:#FF0000')
+        StyleSetSpec(STC_STYLE_BRACEBAD, 'fore:#00009D,back:#FF0000')
         # Indentation guide
         StyleSetSpec(STC_STYLE_INDENTGUIDE, "fore:#CDCDCD")
 
         # Python styles
-        StyleSetSpec(STC_P_DEFAULT, 'fore:#FFFFFF')
-        #StyleSetSpec(STC_P_DEFAULT, 'fore:#000000')
+        StyleSetSpec(STC_P_DEFAULT, 'fore:#000000')
         # Comments
         StyleSetSpec(STC_P_COMMENTLINE, 'fore:#008000')
         StyleSetSpec(STC_P_COMMENTBLOCK, 'fore:#008000')
@@ -190,8 +181,7 @@ class PythonEditorCtrl(StyledTextCtrl):
         StyleSetSpec(STC_P_STRING, 'fore:#800080')
         StyleSetSpec(STC_P_CHARACTER, 'fore:#800080')
         # Keywords
-        StyleSetSpec(STC_P_WORD, 'fore:#7171D1,bold')
-        #StyleSetSpec(STC_P_WORD, 'fore:#000080,bold')
+        StyleSetSpec(STC_P_WORD, 'fore:#000080,bold')
         # Triple quotes
         #StyleSetSpec(STC_P_TRIPLE, 'fore:#800080,back:#FFFFEA')
         #StyleSetSpec(STC_P_TRIPLEDOUBLE, 'fore:#800080,back:#FFFFEA')
@@ -205,8 +195,7 @@ class PythonEditorCtrl(StyledTextCtrl):
         StyleSetSpec(STC_P_OPERATOR, 'fore:#800000,bold')
         # Identifiers. I leave this as not bold because everything seems
         # to be an identifier if it doesn't match the above criteria
-        StyleSetSpec(STC_P_IDENTIFIER, 'fore:#6F9EE7')
-        #StyleSetSpec(STC_P_IDENTIFIER, 'fore:#000000')
+        StyleSetSpec(STC_P_IDENTIFIER, 'fore:#000000')
 
         # Caret color
         self.SetCaretForeground("BLUE")
@@ -239,21 +228,13 @@ class PythonEditorCtrl(StyledTextCtrl):
             self.Bind(wx.EVT_MENU, getattr(self, "OnCmd" + ident), id=menuId)
             return menu.Append(menuId, getattr(text, ident, ident))
 
-        menu = wx.Menu()
-        AddMenuItem("Code1", wx.ID_ANY)
-        AddMenuItem("Code2", wx.ID_ANY)
-        AddMenuItem("Code3", wx.ID_ANY)
-        AddMenuItem("Code4", wx.ID_ANY)
-        subm = menu
-        menu = wx.Menu()
         AddMenuItem("Undo", wx.ID_UNDO)
-        AddMenuItem("Codeselect", wx.ID_ANY)
-        menu.AppendMenu(wx.ID_ANY,text=text.CodesmMenu, submenu=subm)
         AddMenuItem("Redo", wx.ID_REDO)
         menu.AppendSeparator()
         AddMenuItem("Cut", wx.ID_CUT)
         AddMenuItem("Copy", wx.ID_COPY)
         AddMenuItem("Paste", wx.ID_PASTE)
+        AddMenuItem("Incrementer", wx.ID_ANY)
         AddMenuItem("Delete", wx.ID_DELETE)
         menu.AppendSeparator()
         AddMenuItem("SelectAll", wx.ID_SELECTALL)
@@ -403,8 +384,13 @@ class PythonEditorCtrl(StyledTextCtrl):
     def OnCmdCopy(self, dummyEvent=None):
         self.Copy()
 
+<<<<<<< Updated upstream
+=======
     def OnCmdCodeselect(self, dummyEvent=None):
         eg.plugins.EventGhost.TriggerEvent(u'code_seletor', 0.1, None, False, False, False)
+
+    def OnCmdIncrementer(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'math_paste_incremente', 0.1, None, False, False, False)
 
     def OnCmdCode1(self):
         return
@@ -421,6 +407,7 @@ class PythonEditorCtrl(StyledTextCtrl):
     def OnCmdCode5(self):
         return
 
+>>>>>>> Stashed changes
     def OnCmdCut(self, dummyEvent=None):
         self.Cut()
 
