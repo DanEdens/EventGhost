@@ -384,8 +384,6 @@ class PythonEditorCtrl(StyledTextCtrl):
     def OnCmdCopy(self, dummyEvent=None):
         self.Copy()
 
-<<<<<<< Updated upstream
-=======
     def OnCmdCodeselect(self, dummyEvent=None):
         eg.plugins.EventGhost.TriggerEvent(u'code_seletor', 0.1, None, False, False, False)
 
@@ -407,7 +405,6 @@ class PythonEditorCtrl(StyledTextCtrl):
     def OnCmdCode5(self):
         return
 
->>>>>>> Stashed changes
     def OnCmdCut(self, dummyEvent=None):
         self.Cut()
 
