@@ -364,6 +364,7 @@ class MainFrame(wx.Frame):
         menuBar.Append(menu, text.BuildMenu)
         Append("ColorCodes")
         Append("IconLibrary")
+        Append("GuidGenerator")
         menu.AppendSeparator()
         menu.AppendMenu(wx.ID_ANY, text=text.ScriptsmMenu, submenu=subm)
         menu.AppendSeparator()
@@ -1083,6 +1084,10 @@ class MainFrame(wx.Frame):
     def OnCmdIconLibrary(self):
         import webbrowser
         webbrowser.open("https://icons8.com/icons", 2, 1)
+
+    def OnCmdGuidGenerator(self):
+        import webbrowser
+        webbrowser.open("https://www.guidgenerator.com/online-guid-generator.aspx", 2, 1)
 
     def OnCmdFlaskDoc(self):
         import webbrowser

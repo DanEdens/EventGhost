@@ -166,6 +166,7 @@ class Default:
             Regextool = "Regex"
             Wxdoc = "wxPython Documentation"
             IconLibrary = "IconLibrary"
+            GuidGenerator = "Guid Gen."
             ScriptsmMenu = "Scripts"
             Script1 = "L&1"
             Script2 = "L&2"
