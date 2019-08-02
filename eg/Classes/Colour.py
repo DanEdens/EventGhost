@@ -20,6 +20,8 @@ import colorsys
 import wx
 
 # Local imports
+from typing import Tuple
+
 from eg.WinApi.Dynamic import (
     COLOR_ACTIVECAPTION,
     COLOR_CAPTIONTEXT,
@@ -29,7 +31,7 @@ from eg.WinApi.Dynamic import (
     COLOR_INACTIVECAPTIONTEXT,
     GetSysColor,
 )
-
+Theme = "default"
 def GetWinSysColour(nIndex):
     val = GetSysColor(nIndex)
     return val & 0xFF, (val >> 8) & 0xFF, (val >> 16) & 0xFF
@@ -40,22 +42,35 @@ class Colour:
 
     These might get configurable in the future.
     """
-    windowText = (255, 255, 0)
-    windowBackground = (0, 0, 0)
-    treeItem = windowText
-    pluginError = (255, 0, 0)
-    errorText = (53, 33, 33)
-    errorBackground = (255, 255, 255)
-    warningText = (0, 0, 0)
-    waningBackground = (255, 246, 110)
-    debugText = (255, 255, 255)
-    debugBackground = (13, 33, 2)
     activeCaption = GetWinSysColour(COLOR_ACTIVECAPTION)
     activeCaptionGradient = GetWinSysColour(COLOR_GRADIENTACTIVECAPTION)
     activeCaptionTextColour = GetWinSysColour(COLOR_CAPTIONTEXT)
     inactiveCaption = GetWinSysColour(COLOR_INACTIVECAPTION)
     inactiveCaptionGradient = GetWinSysColour(COLOR_GRADIENTINACTIVECAPTION)
     inactiveCaptionTextColour = GetWinSysColour(COLOR_INACTIVECAPTIONTEXT)
+    if Theme == "default":
+        windowText = (255, 255, 0)  # type: Tuple[int, int, int]
+        windowBackground = black
+        treeItem = windowText
+        pluginError = (255, 0, 0)
+        errorText = (53, 33, 33)
+        errorBackground = (255, 255, 255)
+        warningText = (0, 0, 0)
+        waningBackground = (255, 246, 110)
+        debugText = (255, 255, 255)
+        debugBackground = (13, 33, 2)
+    elif Theme == "Dark":
+        windowText = (255, 255, 0)  # type: Tuple[int, int, int]
+        windowBackground = (0, 0, 0)
+        treeItem = windowText
+        pluginError = (255, 0, 0)
+        errorText = (53, 33, 33)
+        errorBackground = (255, 255, 255)
+        warningText = (0, 0, 0)
+        waningBackground = (255, 246, 110)
+        debugText = (255, 255, 255)
+        debugBackground = (13, 33, 2)
+
 
     def GetOddLogColour(self, even_colour):
         """
@@ -98,3 +113,47 @@ class Colour:
         """
         red, green, blue = colour
         return colorsys.rgb_to_hsv(red / 255.0, green / 255.0, blue / 255.0)
+
+
+
+class Colordefinitions
+    yellow = (255,255,0)
+    lightyellow = (255, 130, 130)
+    lightblue = (165,217,255)
+    red = (255,0,0)
+    black = (0,0,0)
+    white = (255,255,255)
+    redblack = (53,33,33)
+    UbuntuOrange = #E95420
+    UbuntuLightAubergine = #77216F
+    UbuntuMidAubergine = #5e2750
+    UbuntuDarkAubergine = #2C001E
+    UbuntuWarmGrey = #AEA79F
+    UbuntuCoolGrey = #333333
+    UbuntuTextGrey = #111111
+    UbuntuCanocicalAubergine = #772953
+
+
+class ThemeDefault:
+    windowText = wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOWTEXT).Get()
+    windowBackground = wx.SystemSettings_GetColour(wx.SYS_COLOUR_WINDOW).Get()
+    treeItem = windowText
+    pluginError = (255, 0, 0)
+    errorText = (0, 0, 0)
+    errorBackground = (255, 130, 130)
+    warningText = (0, 0, 0)
+    waningBackground = (255, 246, 110)
+    debugText = (0, 0, 0)
+    debugBackground = (165, 217, 255)
+
+class ThemeDark:
+    windowText = yellow
+    windowBackground = black
+    pluginError = red
+    errorText = redblack
+    errorBackground = white
+    warningText = black
+    waningBackground = (255, 246, 110)
+    debugText = black
+    debugBackground = (13, 33, 2)
+
