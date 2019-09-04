@@ -167,11 +167,17 @@ class Default:
             Wxdoc = "wxPython Documentation"
             IconLibrary = "IconLibrary"
             GuidGenerator = "Guid Gen."
-            ScriptsmMenu = "Scripts"
+            ScriptsmMenu = "&Scripts"
             Script1 = "L&1"
             Script2 = "L&2"
             Script3 = "L&3"
             Script4 = "L&4"
+            IndexsmMenu = "CommandIndex"
+            Index1 = "Add command"
+            Index2 = "Update Network DB"
+            Index3 = "Open Index"
+            Index4 = "temp"
+
             FlaskDoc = "Flask Documentation"
 
             JobMenu = "&Jobname"

@@ -361,12 +361,21 @@ class MainFrame(wx.Frame):
         Append("Script4")
         subm = menu
         menu = wx.Menu()
+        Append("Index1")
+        Append("Index2")
+        Append("Index3")
+        Append("Index4")
+        subm2 = menu
+
+        menu = wx.Menu()
         menuBar.Append(menu, text.BuildMenu)
         Append("ColorCodes")
         Append("IconLibrary")
         Append("GuidGenerator")
         menu.AppendSeparator()
         menu.AppendMenu(wx.ID_ANY, text=text.ScriptsmMenu, submenu=subm)
+        menu.AppendSeparator()
+        menu.AppendMenu(wx.ID_ANY, text=text.IndexsmMenu, submenu=subm2)
         menu.AppendSeparator()
         Append("FlaskDoc")
         Append("Wxdoc")
@@ -1076,6 +1085,18 @@ class MainFrame(wx.Frame):
 
     def OnCmdScript4(self):
         return
+
+    def OnCmdIndex1(self):
+        eg.plugins.EventGhost.TriggerEvent(u'add_command', 0.1, None, False, False, False)
+
+    def OnCmdIndex2(self):
+        eg.plugins.EventGhost.TriggerEvent(u'send_command', 0.1, None, False, False, False)
+
+    def OnCmdIndex3(self):
+        eg.plugins.EventGhost.TriggerEvent(u'open_command', 0.1, None, False, False, False)
+
+    def OnCmdIndex4(self):
+        eg.plugins.EventGhost.TriggerEvent(u'temp_command', 0.1, None, False, False, False)
 
     def OnCmdColorCodes(self):
         import webbrowser
