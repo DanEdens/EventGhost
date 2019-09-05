@@ -116,6 +116,8 @@ class Default:
             Save = "&Save"
             SaveAs = "Save &As..."
             Options = "O&ptions..."
+            Editconfig = "Edit Configuration File"
+            ProgramFiles = "EG Program Files"
             Restart = "&Restart"
             RestartAsAdmin = "Restart as Administrator"
             Exit = "E&xit"

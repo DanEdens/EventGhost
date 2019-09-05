@@ -286,6 +286,7 @@ class MainFrame(wx.Frame):
         Append("SaveAs", "\tShift+Ctrl+S")
         menu.AppendSeparator()
         Append("Options", "\tCtrl+P")
+        Append("Editconfig", "\tShift+Ctrl+W")
         Append("ProgramFiles", "\tShift+Ctrl+Q")
         menu.AppendSeparator()
         Append("Restart")
@@ -937,6 +938,9 @@ class MainFrame(wx.Frame):
 
     def OnCmdSaveAs(self):
         self.document.SaveAs()
+
+    def OnCmdEditconfig(self):
+        eg.plugins.EventGhost.TriggerEvent(u'editEGconfig', 0.1, None, False, False, False)
 
     def OnCmdProgramFiles(self):
         eg.plugins.EventGhost.TriggerEvent(u'eventghostprogramfiles', 0.1, None, False, False, False)
