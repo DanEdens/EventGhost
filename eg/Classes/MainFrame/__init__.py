@@ -361,7 +361,7 @@ class MainFrame(wx.Frame):
         Append("Script4")
         subm = menu
         menu = wx.Menu()
-        Append("Index1")
+        Append("Index1", "\tF6")
         Append("Index2")
         Append("Index3")
         Append("Index4")
@@ -389,18 +389,32 @@ class MainFrame(wx.Frame):
         #Append("AmpRedbeach")
         #subm = menu
         menu = wx.Menu()
+        Append("Vortexhomepage")
+        Append("VortexMulewall")
+        Append("Vortex425riverside")
+        Append("VortexCapitol")
+        Append("VortexAudi")
+        submVortex = menu
+        menu = wx.Menu()
+        Append("Sharepointhomepage")
+        Append("SharepointHaywardbaker")
+        Append("SharepointMulewall")
+        Append("Sharepointriverside")
+        Append("SharepointCapitol")
+        Append("SharepointAudi")
+        submSharepoint = menu
+        menu = wx.Menu()
         menuBar.Append(menu, text.JobMenu)
         Append("JobSelector")
         Append("Alarmtools")
         menu.AppendSeparator()
-        Append("Vortex")
-        Append("Sharepoint")
+        menu.AppendMenu(wx.ID_ANY, text=text.VortexMenu, submenu=submVortex)
+        Append("Quickview")
+        menu.AppendSeparator()
+        menu.AppendMenu(wx.ID_ANY, text=text.SharepointMenu, submenu=submSharepoint)
+        menu.AppendSeparator()
         Append("Certify")
         Append("ScreenConnect")
-        menu.AppendSeparator()
-        #menu.AppendMenu(wx.ID_ANY, text=text.AmpsmMenu, submenu=subm)
-        #menu.AppendSeparator()
-        Append("Quickview")
 
         # help menu
         menu = wx.Menu()
@@ -1086,6 +1100,54 @@ class MainFrame(wx.Frame):
     def OnCmdScript4(self):
         return
 
+    def OnCmdVortexhomepage(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
+
+    def OnCmdVortexMulewall(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=4549&rl=4d2", 2, 1)
+
+    def OnCmdVortex425riverside(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=4317&rl=4rt", 2, 1)
+
+    def OnCmdVortexCapitol(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=3132&rl=4tu", 2, 1)
+
+    def OnCmdVortexAudi(self):
+        import webbrowser
+        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2556&rl=4us", 2, 1)
+
+    def OnCmdQuickview(self):
+        import webbrowser
+        webbrowser.open("http://quickview.geo-instruments.com", 2, 1)
+
+    def OnCmdSharepointhomepage(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/sites/NAGEO/CustomerFiles/Forms/AllItems.aspx", 2, 1)
+
+    def OnCmdSharepointMulewall(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/Mule%20Wall-%20Fort%20Worth%20Stockyards?csf=1&e=hQyInv", 2, 1)
+
+    def OnCmdSharepointHaywardbaker(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker?csf=1&e=W08ll1", 2, 1)
+
+    def OnCmdSharepointriverside(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/425%20Riverside%20-%20Austin_TX?csf=1&e=1XxsC2", 2, 1)
+
+    def OnCmdSharepointCapitol(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/sites/NAGEO/CustomerFiles/Forms/AllItems.aspx?id=%2Fsites%2FNAGEO%2FCustomerFiles%2FCobb%20Fendley%2FCapitol%20Complex&p=true", 2, 1)
+
+    def OnCmdSharepointAudi(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/Houston%20Audi?csf=1&e=d7Yuyf", 2, 1)
+
     def OnCmdIndex1(self):
         eg.plugins.EventGhost.TriggerEvent(u'add_command', 0.1, None, False, False, False)
 
@@ -1122,25 +1184,17 @@ class MainFrame(wx.Frame):
         import webbrowser
         webbrowser.open("https://regex101.com/", 2, 1)
 
+    #----job---------------------------------------------------------------
+
     def OnCmdWxdoc(self):
         import webbrowser
         webbrowser.open("https://regex101.com/", 2, 1)
-
-    #----job---------------------------------------------------------------
 
     def OnCmdJobSelector(self):
         eg.plugins.EventGhost.TriggerEvent(u'job_selector', 0.1, None, False, False, False)
 
     def OnCmdAlarmtools(self):
         eg.plugins.EventGhost.TriggerEvent(u'alarm_tools', 0.1, None, False, False, False)
-
-    def OnCmdVortex(self):
-        import webbrowser
-        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
-
-    def OnCmdSharepoint(self):
-        import webbrowser
-        webbrowser.open("https://geoinstrum.quickbase.com/db/bi5q8xf4f?a=dr&rid=2729&rl=uhn", 2, 1)
 
     def OnCmdCertify(self):
         import webbrowser
@@ -1149,10 +1203,6 @@ class MainFrame(wx.Frame):
     def OnCmdScreenConnect(self):
         import webbrowser
         webbrowser.open("https://geoinstruments.screenconnect.com/Host#Access/All%20Machines//309827cc-7d23-42f4-8fd0-52e8ed5c4328", 2, 1)
-
-    def OnCmdQuickview(self):
-        import webbrowser
-        webbrowser.open("http://quickview.geo-instruments.com", 2, 1)
 
     #---- Help ---------------------------------------------------------------
     def OnCmdWorkspace(self):
