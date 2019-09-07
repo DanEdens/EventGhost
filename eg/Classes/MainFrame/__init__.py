@@ -420,6 +420,7 @@ class MainFrame(wx.Frame):
         Append("JobSelector")
         Append("Alarmtools")
         menu.AppendSeparator()
+        menu.AppendMenu(wx.ID_ANY, text=text.AmpMenu, submenu=submAmp)
         menu.AppendMenu(wx.ID_ANY, text=text.VortexMenu, submenu=submVortex)
         Append("Quickview")
         menu.AppendSeparator()
