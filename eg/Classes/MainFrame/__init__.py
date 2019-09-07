@@ -319,6 +319,7 @@ class MainFrame(wx.Frame):
         menu = wx.Menu()
         menuBar.Append(menu, text.ViewMenu)
         Append("HideShowToolbar", kind=wx.ITEM_CHECK).Check(Config.showToolbar)
+        #Append("TogAtop")
         Append("TogAtop", kind=wx.ITEM_CHECK).Check(Config.TogAtop)
         menu.AppendSeparator()
         Append("Expand", image=GetInternalBitmap("expand"))
@@ -398,6 +399,14 @@ class MainFrame(wx.Frame):
         Append("VortexCapitol")
         Append("VortexAudi")
         submVortex = menu
+        menu = wx.Menu()
+        Append("Amphomepage")
+        Append("AmpMulewall")
+        Append("Ampriverside")
+        Append("AmpCapitol")
+        Append("AmpAudi")
+        submAmp = menu
+
         menu = wx.Menu()
         Append("Sharepointhomepage")
         Append("SharepointHaywardbaker")
@@ -1161,6 +1170,30 @@ class MainFrame(wx.Frame):
         webbrowser.open("https://kellercloud.sharepoint.com/sites/NAGEO/CustomerFiles/Forms/AllItems.aspx?id=%2Fsites%2FNAGEO%2FCustomerFiles%2FCobb%20Fendley%2FCapitol%20Complex&p=true", 2, 1)
 
     def OnCmdSharepointAudi(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/Houston%20Audi?csf=1&e=d7Yuyf", 2, 1)
+
+    def OnCmdAmphomepage(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/sites/NAGEO/CustomerFiles/Forms/AllItems.aspx", 2, 1)
+
+    def OnCmdAmpMulewall(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/Mule%20Wall-%20Fort%20Worth%20Stockyards?csf=1&e=hQyInv", 2, 1)
+
+    def OnCmdAmpHaywardbaker(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker?csf=1&e=W08ll1", 2, 1)
+
+    def OnCmdAmpriverside(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/425%20Riverside%20-%20Austin_TX?csf=1&e=1XxsC2", 2, 1)
+
+    def OnCmdAmpCapitol(self):
+        import webbrowser
+        webbrowser.open("https://kellercloud.sharepoint.com/sites/NAGEO/CustomerFiles/Forms/AllItems.aspx?id=%2Fsites%2FNAGEO%2FCustomerFiles%2FCobb%20Fendley%2FCapitol%20Complex&p=true", 2, 1)
+
+    def OnCmdAmpAudi(self):
         import webbrowser
         webbrowser.open("https://kellercloud.sharepoint.com/:f:/r/sites/NAGEO/CustomerFiles/Hayward%20Baker/Houston%20Audi?csf=1&e=d7Yuyf", 2, 1)
 
