@@ -136,6 +136,7 @@ class Default:
 
             ViewMenu = "&View"
             HideShowToolbar = "&Toolbar"
+            TogAtop = "Al&ways-on-Top"
             ExpandCollapseMenu = "Expand/Collapse"
             Expand = "Expand"
             Collapse = "Collapse"

@@ -64,6 +64,7 @@ class Config(eg.PersistentData):
     position = (50, 50)
     size = (700, 450)
     showToolbar = True
+    TogAtop = False
     logDate = False
     logTime = False
     indentLog = True
@@ -318,6 +319,7 @@ class MainFrame(wx.Frame):
         menu = wx.Menu()
         menuBar.Append(menu, text.ViewMenu)
         Append("HideShowToolbar", kind=wx.ITEM_CHECK).Check(Config.showToolbar)
+        Append("TogAtop", kind=wx.ITEM_CHECK).Check(Config.TogAtop)
         menu.AppendSeparator()
         Append("Expand", image=GetInternalBitmap("expand"))
         Append("Collapse", image=GetInternalBitmap("collapse"))
@@ -943,7 +945,8 @@ class MainFrame(wx.Frame):
         eg.plugins.EventGhost.TriggerEvent(u'editEGconfig', 0.1, None, False, False, False)
 
     def OnCmdProgramFiles(self):
-        eg.plugins.EventGhost.TriggerEvent(u'eventghostprogramfiles', 0.1, None, False, False, False)
+        eg.plugins.System.Execute(u'C:\\Program Files (x86)\\EventGhost', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
+        #eg.plugins.EventGhost.TriggerEvent(u'eventghostprogramfiles', 0.1, None, False, False, False)
 
     @eg.AsTasklet
     def OnCmdOptions(self):
@@ -997,11 +1000,20 @@ class MainFrame(wx.Frame):
     #---- View ---------------------------------------------------------------
     def OnCmdHideShowToolbar(self):
         Config.showToolbar = not Config.showToolbar
-        #self.auiManager.GetPane("toolBar").Show(Config.showToolbar)
-        #self.auiManager.Update()
         self.toolBar.Show(Config.showToolbar)
         self.Layout()
         self.SendSizeEvent()
+
+    def OnCmdTogAtop(self):
+        Config.TogAtop = not Config.TogAtop
+        eg.result = Config.TogAtop
+        eg.plugins.EventGhost.DumpResult()
+        if Config.TogAtop == False:
+            eg.plugins.Window.SetAlwaysOnTop(0)
+        else:
+            eg.plugins.Window.SetAlwaysOnTop(1)
+
+
 
     def OnCmdExpand(self):
         self.treeCtrl.Expand(self.treeCtrl.GetSelection())
@@ -1237,7 +1249,9 @@ class MainFrame(wx.Frame):
         eg.wit.Show(refreshTree=True)
 
     def OnCmdTerminal(self):
-        eg.plugins.EventGhost.TriggerEvent(u'shell', 0.1, None, False, False, False)
+        eg.plugins.System.Execute(u'C:\\Users\\Dan.Edens\\Desktop\\Scripts\\_Main\\Doskey\\dosmacros.lnk', u'', 0,
+                                  False, 2, u'', False, False, u'', False, False, False, False)
+        #eg.plugins.EventGhost.TriggerEvent(u'shell', 0.1, None, False, False, False)
         return
 
     def OnCmdPythonShell(self):
