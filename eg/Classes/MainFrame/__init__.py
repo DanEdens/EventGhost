@@ -284,11 +284,13 @@ class MainFrame(wx.Frame):
         Append("New", "\tCtrl+N")
         Append("Open", "\tCtrl+O")
         Append("Save", "\tCtrl+S").Enable(False)
-        Append("SaveAs", "\tShift+Ctrl+S")
+        Append("VersionUp", "\tShift+Ctrl+S")
+        Append("SaveAs")
         menu.AppendSeparator()
         Append("Options", "\tCtrl+P")
         Append("Editconfig", "\tShift+Ctrl+W")
         Append("ProgramFiles", "\tShift+Ctrl+Q")
+        Append("GhostFiles", "\tShift+Ctrl+G")
         menu.AppendSeparator()
         Append("Restart")
         Append("RestartAsAdmin", "\tShift+Ctrl+~")
@@ -319,7 +321,6 @@ class MainFrame(wx.Frame):
         menu = wx.Menu()
         menuBar.Append(menu, text.ViewMenu)
         Append("HideShowToolbar", kind=wx.ITEM_CHECK).Check(Config.showToolbar)
-        #Append("TogAtop")
         Append("TogAtop", kind=wx.ITEM_CHECK).Check(Config.TogAtop)
         menu.AppendSeparator()
         Append("Expand", image=GetInternalBitmap("expand"))
@@ -369,6 +370,8 @@ class MainFrame(wx.Frame):
         Append("Index2")
         Append("Index3")
         Append("Index4")
+        #menu.AppendSeparator()
+        #menu.AppendMenu(wx.ID_ANY, text=text.ScriptsmMenu, submenu=subm)
         subm2 = menu
 
         menu = wx.Menu()
@@ -387,11 +390,6 @@ class MainFrame(wx.Frame):
 
 
         # build menu
-        #menu = wx.Menu()
-        #Append("AmpCap")
-        #Append("AmpAudi")
-        #Append("AmpRedbeach")
-        #subm = menu
         menu = wx.Menu()
         Append("Vortexhomepage")
         Append("VortexMulewall")
@@ -951,12 +949,17 @@ class MainFrame(wx.Frame):
     def OnCmdSaveAs(self):
         self.document.SaveAs()
 
+    def OnCmdVersionUp(self):
+        self.document.VersionUp()
+
     def OnCmdEditconfig(self):
         eg.plugins.EventGhost.TriggerEvent(u'editEGconfig', 0.1, None, False, False, False)
 
     def OnCmdProgramFiles(self):
         eg.plugins.System.Execute(u'C:\\Program Files (x86)\\EventGhost', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
-        #eg.plugins.EventGhost.TriggerEvent(u'eventghostprogramfiles', 0.1, None, False, False, False)
+
+    def OnCmdGhostFiles(self):
+        eg.plugins.System.Execute(u'C:\\Users\\Dan.Edens\\Google Drive\\Join Files\\Stack\\Ghost files', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
 
     @eg.AsTasklet
     def OnCmdOptions(self):

@@ -119,15 +119,16 @@ class Document(object):
         """
         if not self.isDirty:
             return wx.ID_OK
-        dialog = SaveChangesDialog(self.frame)
-        result = dialog.ShowModal()
-        dialog.Destroy()
-        if result == wx.ID_CANCEL:
-            return wx.ID_CANCEL
-        elif result == wx.ID_YES:
-            return self.Save()
-        else:
-            return wx.ID_NO
+        return self.Save()
+        #dialog = SaveChangesDialog(self.frame)
+        #result = dialog.ShowModal()
+        #dialog.Destroy()
+        #if result == wx.ID_CANCEL:
+            #return wx.ID_CANCEL
+        #elif result == wx.ID_YES:
+            #return self.Save()
+        #else:
+            #return wx.ID_NO
 
     def IsDirty(self):
         return self.isDirty
@@ -444,6 +445,21 @@ class Document(object):
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
         return wx.ID_YES
+
+    def VersionUp(self):
+        print eg.globals.version
+        old = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+eg.globals.version+".egtree"
+        eg.globals.version = int(eg.globals.version)
+        eg.globals.version +=1
+        eg.globals.version = str(eg.globals.version)
+        filePath = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+eg.globals.version+".egtree"
+        if filePath is None:
+            return wx.ID_CANCEL
+        self.WriteFile(filePath)
+        self.SetFilePath(filePath)
+        eg.plugins.EventGhost.TriggerEvent(u'mvoldconfig', 0.1, old, False, False, False)
+        return wx.ID_YES
+
 
     @eg.LogIt
     def SetExpandState(self, expanded):

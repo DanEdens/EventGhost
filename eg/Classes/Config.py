@@ -69,6 +69,7 @@ class Config(Section):
     propResize = True
     refreshEnv = False
     showTrayIcon = True
+    TogAtop = False
     useFixedFont = False
 
     class plugins:  #pylint: disable-msg=C0103
