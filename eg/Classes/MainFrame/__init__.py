@@ -291,6 +291,7 @@ class MainFrame(wx.Frame):
         Append("Editconfig", "\tShift+Ctrl+W")
         Append("ProgramFiles", "\tShift+Ctrl+Q")
         Append("GhostFiles", "\tShift+Ctrl+G")
+        Append("Pycharm", "\tShift+Ctrl+Y")
         menu.AppendSeparator()
         Append("Restart")
         Append("RestartAsAdmin", "\tShift+Ctrl+~")
@@ -961,6 +962,9 @@ class MainFrame(wx.Frame):
     def OnCmdGhostFiles(self):
         eg.plugins.System.Execute(u'C:\\Users\\Dan.Edens\\Google Drive\\Join Files\\Stack\\Ghost files', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
 
+    def OnCmdPycharm(self):
+        eg.plugins.System.Execute(u'C:\\Program Files\\JetBrains\\PyCharm Community Edition 2019.1.3\\bin\\pycharm64.exe', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
+
     @eg.AsTasklet
     def OnCmdOptions(self):
         eg.OptionsDialog.GetResult(self)
@@ -1251,7 +1255,7 @@ class MainFrame(wx.Frame):
 
     def OnCmdCertify(self):
         import webbrowser
-        webbrowser.open("https://www.certify.com/Home2.aspx?reload=1", 2, 1)
+        webbrowser.open("https://myapps.microsoft.com/signin/Certify/23dede1d-3cf3-4735-9e09-edc795948e28", 2, 1)
 
     def OnCmdScreenConnect(self):
         import webbrowser

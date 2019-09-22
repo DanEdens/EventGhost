@@ -152,7 +152,7 @@ class PythonEditorCtrl(StyledTextCtrl):
         # Global default style
         StyleSetSpec(
             STC_STYLE_DEFAULT,
-            'fore:#000000,back:#FFFFFF,face:Courier New,size:9'
+            'fore:#000000,back:#FFFFFF,face:Courier New,size:12'
         )
 
         # Clear styles and revert to default.
@@ -235,15 +235,15 @@ class PythonEditorCtrl(StyledTextCtrl):
         AddMenuItem("Code4", wx.ID_ANY)
         subm = menu
         menu = wx.Menu()
-        AddMenuItem("Undo", wx.ID_UNDO)
         AddMenuItem("Codeselect", wx.ID_ANY)
-        menu.AppendMenu(wx.ID_ANY, text=text.CodesmMenu, submenu=subm)
+        AddMenuItem("Undo", wx.ID_UNDO)
+        #menu.AppendMenu(wx.ID_ANY, text=text.CodesmMenu, submenu=subm)
         AddMenuItem("Redo", wx.ID_REDO)
         menu.AppendSeparator()
         AddMenuItem("Cut", wx.ID_CUT)
         AddMenuItem("Copy", wx.ID_COPY)
         AddMenuItem("Paste", wx.ID_PASTE)
-        AddMenuItem("Incrementer", wx.ID_ANY)
+        #AddMenuItem("Incrementer", wx.ID_ANY)
         AddMenuItem("Delete", wx.ID_DELETE)
         menu.AppendSeparator()
         AddMenuItem("SelectAll", wx.ID_SELECTALL)
@@ -394,24 +394,24 @@ class PythonEditorCtrl(StyledTextCtrl):
         self.Copy()
 
     def OnCmdCodeselect(self, dummyEvent=None):
-        eg.plugins.EventGhost.TriggerEvent(u'code_seletor', 0.1, None, False, False, False)
+        eg.plugins.EventGhost.TriggerEvent(u'code_selector', 0.1, None, False, False, False)
 
     def OnCmdIncrementer(self, dummyEvent=None):
         eg.plugins.EventGhost.TriggerEvent(u'math_paste_incremente', 0.1, None, False, False, False)
 
-    def OnCmdCode1(self):
-        return
+    def OnCmdCode1(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'Code1', 0.1, None, False, False, False)
 
-    def OnCmdCode2(self):
-        return
+    def OnCmdCode2(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'Code2', 0.1, None, False, False, False)
 
-    def OnCmdCode3(self):
-        return
+    def OnCmdCode3(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'Code3', 0.1, None, False, False, False)
 
-    def OnCmdCode4(self):
-        return
+    def OnCmdCode4(self, dummyEvent=None):
+        eg.plugins.EventGhost.TriggerEvent(u'Code4', 0.1, None, False, False, False)
 
-    def OnCmdCode5(self):
+    def OnCmdCode5(self, dummyEvent=None):
         return
 
     def OnCmdCut(self, dummyEvent=None):

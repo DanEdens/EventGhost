@@ -118,6 +118,7 @@ class Default:
             Options = "O&ptions..."
             Editconfig = "Edit Configuration File"
             ProgramFiles = "EG Program Files"
+            Pycharm = "Pycharm"
             Restart = "&Restart"
             RestartAsAdmin = "Restart as Administrator"
             Exit = "E&xit"
@@ -229,6 +230,7 @@ class Default:
             Reset = "&Reset"
 
             CodesmMenu = "Code Blocks..."
+            Codeselect = "Code Selector"
             Incrementer = "Paste - Increment"
             Code1 = "c1"
             Code2 = "c2"
