@@ -436,6 +436,8 @@ class Document(object):
         if not self.filePath:
             return self.SaveAs()
         self.WriteFile(self.filePath)
+        tmp = self.filePath[-33:]
+        print "Version "+str(eg.globals.version)+" Saved at "+tmp
         return wx.ID_YES
 
     def SaveAs(self):
@@ -444,20 +446,32 @@ class Document(object):
             return wx.ID_CANCEL
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
+        tmp = self.filePath[-33:]
+        print "Version "+str(eg.globals.version)+" Saved at "+tmp
         return wx.ID_YES
 
     def VersionUp(self):
-        print eg.globals.version
-        old = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+eg.globals.version+".egtree"
-        eg.globals.version = int(eg.globals.version)
-        eg.globals.version +=1
-        eg.globals.version = str(eg.globals.version)
-        filePath = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+eg.globals.version+".egtree"
-        if filePath is None:
-            return wx.ID_CANCEL
+        egg = eg.globals
+        print egg.version
+        filePath = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+str(egg.version)+".egtree"
+        egg.version = int(egg.version)
+        versionold = filePath
+        egg.version +=1
+        egg.version = str(egg.version)
+        filePath = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai " + str(egg.version) + ".egtree"
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
-        eg.plugins.EventGhost.TriggerEvent(u'mvoldconfig', 0.1, old, False, False, False)
+        #newfile = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+str(egg.version)+".egtree"
+        #egg.olddata = "egg.version = "+str(egg.versionold)
+        #egg.newdata = "egg.version = "+str(egg.version)
+        #with open(newfile, 'r') as file:
+        #    filedata = file.read()
+        #filedata = filedata.replace(egg.olddata, egg.newdata)
+        #with open(newfile, 'w') as file:
+        #    file.write(filedata)
+        #    print 'data replaced'
+        #print "Version set to "+egg.version
+        eg.plugins.EventGhost.TriggerEvent(u'mvoldconfig', 0.1, versionold, False, False, False)
         return wx.ID_YES
 
 
