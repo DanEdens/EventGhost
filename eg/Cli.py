@@ -69,7 +69,9 @@ class args:
 
 def restart():
     if send_message('eg.document.IsDirty') is True:
-        answer = ctypes.windll.user32.MessageBoxA(
+        answer = send_message('eg.document.Save')
+
+x = """        answer = ctypes.windll.user32.MessageBoxA(
             0,
             'EventGhost cannot restart.             \n\n'
             'Configuration contains unsaved changes.\n'
@@ -100,7 +102,7 @@ def restart():
         sys.exit(1)
 
     return True
-
+"""
 
 def send_message(msg, *msg_args):
 

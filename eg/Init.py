@@ -109,7 +109,8 @@ def InitGui():
     if startupFile is None:
         startupFile = config.autoloadFilePath
     if startupFile and not exists(startupFile):
-        eg.PrintError(eg.text.Error.FileNotFound % startupFile)
+        eg.plugins.System.Execute(u'C:\\Users\\Dan.Edens\\Google Drive\\Join Files\\Stack\\Ghost files', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
+        #eg.PrintError(eg.text.Error.FileNotFound % startupFile)
         startupFile = None
 
     eg.eventThread.Start()

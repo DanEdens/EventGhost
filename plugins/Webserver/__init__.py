@@ -327,7 +327,7 @@ class VarTable(wx.ListCtrl, TextEditMixin):
         self.edCell = None
         self.Show(False)
         TextEditMixin.__init__(self)
-        self.editor.SetBackgroundColour(wx.Colour(135, 206, 255))
+        self.editor.SetBackgroundColour(wx.Colour(195, 195, 195))
 
         self.InsertColumn(0, txt.vrbl)
         self.InsertColumn(1, txt.defVal, wx.LIST_FORMAT_LEFT)

@@ -156,7 +156,7 @@ class System(eg.PluginBase):
         text = self.text
 
         self.AddEvents(*EVENT_LIST)
-
+#TODO add my functions as options
         self.AddAction(Execute)
         self.AddAction(Command)
         self.AddAction(SetClipboard)
@@ -1021,7 +1021,7 @@ class ShowPictureFrame(wx.Frame):
             "ShowPictureFrame",
             style=wx.NO_BORDER | wx.FRAME_NO_TASKBAR  #| wx.STAY_ON_TOP
         )
-        self.SetBackgroundColour(wx.Colour(0, 0, 0))
+        self.SetBackgroundColour(wx.Colour(195, 195, 195))
         self.Bind(wx.EVT_LEFT_DCLICK, self.LeftDblClick)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         bitmap = wx.EmptyBitmap(1, 1)

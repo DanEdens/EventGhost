@@ -789,6 +789,7 @@ class MainFrame(wx.Frame):
         except ValueError:
             pass
         if len(self.openDialogs) == 0:
+            pass
             self.SetWindowStyleFlag(self.style)
 
     def OnSelectionChange(self, dummySelection):
@@ -1278,6 +1279,7 @@ class MainFrame(wx.Frame):
         webbrowser.open("http://localhost/eventghost.html", 2, 1)
 
     def OnCmdCheckUpdate(self):
+        #set this up to check if changelog is dirty
         eg.CheckUpdate.CheckUpdateManually()
 
     def OnCmdWIT(self):
@@ -1365,6 +1367,7 @@ class MainFrame(wx.Frame):
             rootObject=eg.globals.__dict__,
             #locals=eg.globals.__dict__,
             rootLabel="eg.globals",
+            #rootLabel="egg",
             config=pyCrustConfig,
             dataDir=eg.configDir,
         )
