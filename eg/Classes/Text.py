@@ -92,6 +92,7 @@ class Default:
         pluginStartError = "Error starting plugin: %s"
         pluginLoadError = "Error loading plugin file: %s"
         configureError = "Error while configuring: %s"
+        FallbackConfig = "C:\\Users\\Dan.Edens\\Google Drive\\Join Files\\Stack\\Ghost files\\testenv_1.egtree"
 
     class Plugin:
         pass
