@@ -436,7 +436,10 @@ class Document(object):
         if not self.filePath:
             return self.SaveAs()
         self.WriteFile(self.filePath)
+        #import re
+        #x = re.search(r"\bG\w+", self.filePath)
         tmp = self.filePath[-33:]
+        #tmp = x.span()
         print "Version "+str(eg.globals.version)+" Saved at "+tmp
         return wx.ID_YES
 
