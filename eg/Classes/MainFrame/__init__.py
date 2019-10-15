@@ -961,10 +961,11 @@ class MainFrame(wx.Frame):
         eg.plugins.System.Execute(u'C:\\Program Files (x86)\\EventGhost', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
 
     def OnCmdGhostFiles(self):
-        eg.plugins.System.Execute(u'C:\\Users\\Dan.Edens\\Google Drive\\Join Files\\Stack\\Ghost files', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
+        eg.plugins.System.Execute(u'C:\\Users\\Dan.Edens\\Desktop\\Tree\\Drive\\Ghost', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
 
     def OnCmdPycharm(self):
-        eg.plugins.System.Execute(u'C:\\Program Files\\JetBrains\\PyCharm Community Edition 2019.1.3\\bin\\pycharm64.exe', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
+        eg.plugins.System.Execute(u'C:\\Program Files (x86)\\JetBrains\\PyCharm Community Edition 2019.2.3\\bin\\pycharm64.exe', u'', 0, False, 2, u'', False, False, u'', False, False, False, False)
+
 
     @eg.AsTasklet
     def OnCmdOptions(self):
