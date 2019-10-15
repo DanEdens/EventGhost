@@ -457,12 +457,12 @@ class Document(object):
         egg = eg.globals
         print egg.version
         ##fix this
-        filePath = "C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\general ai "+ str(egg.version) + ".egtree"
+        filePath = "C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\general ai "+str(egg.version)+".egtree"
         egg.version = int(egg.version)
         versionold = filePath
         egg.version +=1
         egg.version = str(egg.version)
-        filePath = "C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\general ai " + str(egg.version) + ".egtree"
+        filePath = "C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\general ai "+str(egg.version)+".egtree"
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
         eg.plugins.EventGhost.TriggerEvent(u'mvoldconfig', 0.1, versionold, False, False, False)
