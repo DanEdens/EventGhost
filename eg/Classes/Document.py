@@ -456,12 +456,12 @@ class Document(object):
     def VersionUp(self):
         egg = eg.globals
         print egg.version
-        filePath = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+str(egg.version)+".egtree"
+        filePath = egg.ghost+"general ai "+str(egg.version)+".egtree"
         egg.version = int(egg.version)
         versionold = filePath
         egg.version +=1
         egg.version = str(egg.version)
-        filePath = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai " + str(egg.version) + ".egtree"
+        filePath = egg.ghost+"general ai "+str(egg.version)+".egtree"
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
         #newfile = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+str(egg.version)+".egtree"
