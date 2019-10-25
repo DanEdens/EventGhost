@@ -464,16 +464,6 @@ class Document(object):
         filePath = egg.ghost+"general ai "+str(egg.version)+".egtree"
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
-        #newfile = "C:\Users\Dan.Edens\Google Drive\Join Files\Stack\Ghost files\general ai "+str(egg.version)+".egtree"
-        #egg.olddata = "egg.version = "+str(egg.versionold)
-        #egg.newdata = "egg.version = "+str(egg.version)
-        #with open(newfile, 'r') as file:
-        #    filedata = file.read()
-        #filedata = filedata.replace(egg.olddata, egg.newdata)
-        #with open(newfile, 'w') as file:
-        #    file.write(filedata)
-        #    print 'data replaced'
-        #print "Version set to "+egg.version
         eg.plugins.EventGhost.TriggerEvent(u'mvoldconfig', 0.1, versionold, False, False, False)
         return wx.ID_YES
 
