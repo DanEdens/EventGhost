@@ -26,11 +26,13 @@ from xml.etree import cElementTree as ElementTree
 # Local imports
 import eg
 
+
 class Document(object):
     def __init__(self):
         class ItemMixin:
             document = self
             root = None
+
         self.ItemMixin = ItemMixin
         itemNamespace = {}
         self.XMLTag2ClassDict = {}
@@ -42,8 +44,8 @@ class Document(object):
             return cls
 
         self.TreeLink = eg.TreeLink
-#        self.TreeItem = MakeCls("TreeItem")
-#        self.ContainerItem = MakeCls("ContainerItem")
+        #        self.TreeItem = MakeCls("TreeItem")
+        #        self.ContainerItem = MakeCls("ContainerItem")
         self.EventItem = MakeCls("EventItem")
         self.ActionItem = MakeCls("ActionItem")
         self.PluginItem = MakeCls("PluginItem")
@@ -120,15 +122,15 @@ class Document(object):
         if not self.isDirty:
             return wx.ID_OK
         return self.Save()
-        #dialog = SaveChangesDialog(self.frame)
-        #result = dialog.ShowModal()
-        #dialog.Destroy()
-        #if result == wx.ID_CANCEL:
-            #return wx.ID_CANCEL
-        #elif result == wx.ID_YES:
-            #return self.Save()
-        #else:
-            #return wx.ID_NO
+        # dialog = SaveChangesDialog(self.frame)
+        # result = dialog.ShowModal()
+        # dialog.Destroy()
+        # if result == wx.ID_CANCEL:
+        # return wx.ID_CANCEL
+        # elif result == wx.ID_YES:
+        # return self.Save()
+        # else:
+        # return wx.ID_NO
 
     def IsDirty(self):
         return self.isDirty
@@ -173,7 +175,7 @@ class Document(object):
             return
         result = eg.AddEventDialog.GetResult(self.frame)
         if result is None:
-           return
+            return
         return eg.UndoHandler.NewEvent(self).Do(
             self.selection,
             label=result[0]
@@ -281,6 +283,7 @@ class Document(object):
                 for child in item.childs:
                     i = Traverse(child, i)
             return i
+
         Traverse(self.root, -1)
 
         return expanded
@@ -327,8 +330,8 @@ class Document(object):
         if filePath is None:
             return self.LoadEmpty()
         self.ResetUndoState()
-#        if self.root:
-#            self.root.Delete()
+        #        if self.root:
+        #            self.root.Delete()
         if not filePath:
             filePath = os.path.join(eg.mainDir, "Example.egtree")
             self.SetFilePath(False)
@@ -350,8 +353,8 @@ class Document(object):
     @eg.LogIt
     def LoadEmpty(self):
         self.ResetUndoState()
-#        if self.root:
-#            self.root.Delete()
+        #        if self.root:
+        #            self.root.Delete()
         self.SetFilePath(None)
         eg.TreeLink.StartLoad()
         node = ElementTree.Element("EventGhost")
@@ -382,7 +385,7 @@ class Document(object):
                 "Do you really want to load the tree file:\n%s" % filePath,
                 eg.APP_NAME,
                 wx.YES_NO | wx.CENTRE | wx.ICON_QUESTION,
-                parent = self.frame,
+                parent=self.frame,
             )
             if res == wx.ID_NO:
                 return wx.ID_CANCEL
@@ -436,11 +439,11 @@ class Document(object):
         if not self.filePath:
             return self.SaveAs()
         self.WriteFile(self.filePath)
-        #import re
-        #x = re.search(r"\bG\w+", self.filePath)
+        # import re
+        # x = re.search(r"\bG\w+", self.filePath)
         tmp = self.filePath[-33:]
-        #tmp = x.span()
-        print "Version "+str(eg.globals.version)+" Saved at "+tmp
+        # tmp = x.span()
+        print "Version " + str(eg.globals.version) + " Saved at " + tmp
         return wx.ID_YES
 
     def SaveAs(self):
@@ -450,24 +453,24 @@ class Document(object):
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
         tmp = self.filePath[-33:]
-        print "Version "+str(eg.globals.version)+" Saved at "+tmp
+        print "Version " + str(eg.globals.version) + " Saved at " + tmp
         return wx.ID_YES
 
     def VersionUp(self):
         egg = eg.globals
         print egg.version
-        ##fix this
-        filePath = "C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\general ai "+str(egg.version)+".egtree"
+        # Read in global from config. should match filepath below, but leaves options open.
+        filePath = egg.config
         egg.version = int(egg.version)
+        # versionold will be removed: Legacy
         versionold = filePath
-        egg.version +=1
+        egg.version += 1
         egg.version = str(egg.version)
-        filePath = "C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\general ai "+str(egg.version)+".egtree"
+        filePath = egg.ghost + "Ghost\general ai " + str(egg.version) + ".egtree"
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
         eg.plugins.EventGhost.TriggerEvent(u'mvoldconfig', 0.1, versionold, False, False, False)
         return wx.ID_YES
-
 
     @eg.LogIt
     def SetExpandState(self, expanded):
@@ -484,6 +487,7 @@ class Document(object):
                 for child in item.childs:
                     i = Traverse(child, i)
             return i
+
         Traverse(self.root, -1)
 
     def SetFilePath(self, filePath):
