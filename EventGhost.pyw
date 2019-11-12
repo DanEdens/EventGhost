@@ -17,6 +17,7 @@
 # with EventGhost. If not, see <http://www.gnu.org/licenses/>.
 
 import sys
+import os
 
 if hasattr(sys, "frozen"):
     from os.path import dirname

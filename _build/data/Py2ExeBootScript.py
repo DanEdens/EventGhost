@@ -28,6 +28,7 @@ So we redirect the sys.stderr to a log file in the applications data folder.
 """
 
 import linecache
+import linecache2 as linecache
 import sys
 
 class StdErrReplacement(object):
