@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright C 2005-2016 EventGhost Project <http://www.eventghost.org/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -50,10 +50,10 @@ def Domain():
 
 def Groups(user_name=Name(), server=None):
     """
-    Retrieves direct and indirect group name the username is a member of for a
-    specific computer/server. If no parameters are passed it will default to
+    Retrieves direct and indirect group name the username is a member of for a 
+    specific computer/server. If no parameters are passed it will default to 
     the current user and the local computer.
-
+    
     :type user_name: str
     :type server: str
     :rtype: list
@@ -75,7 +75,7 @@ def IsDomainLogin():
 
 def IsLocalAdmin():
     """
-    Retrieves if the logged in user is a member of the local administrators
+    Retrieves if the logged in user is a member of the local administrators 
     group.
 
     :rtype: bool
@@ -85,7 +85,7 @@ def IsLocalAdmin():
 
 def IsDomainAdmin():
     """
-    Retrieves if the logged in user is logged into a domain and if they are in
+    Retrieves if the logged in user is logged into a domain and if they are in 
     the administrators group of that domain. If the RPC service is not running
     this will return False.
 

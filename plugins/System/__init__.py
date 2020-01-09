@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -156,7 +156,7 @@ class System(eg.PluginBase):
         text = self.text
 
         self.AddEvents(*EVENT_LIST)
-#TODO add my functions as options
+
         self.AddAction(Execute)
         self.AddAction(Command)
         self.AddAction(SetClipboard)
