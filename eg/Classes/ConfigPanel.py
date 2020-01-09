@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -18,7 +18,6 @@
 
 import types
 import wx
-from inspect import currentframe, getargvalues, getouterframes
 
 # Local imports
 import eg
@@ -52,14 +51,9 @@ class ConfigPanel(wx.PyPanel, eg.ControlProviderMixin):
         self.isDirty = False
         self.resultCode = None
         self.buttonsEnabled = True
-        outer = getouterframes(currentframe())
-        has_args = len(getargvalues(outer[1][0]).args) > 1
-        self.dialog.buttonRow.applyButton.Enable(
-            has_args and self.dialog.treeItem.isFirstConfigure
-        )
+        self.dialog.buttonRow.applyButton.Enable(False)
         self.dialog.buttonRow.okButton.Enable(
-            not has_args or
-            not (has_args and self.dialog.treeItem.isFirstConfigure)
+            not self.dialog.treeItem.isFirstConfigure
         )
 
     def AddCtrl(self, ctrl):

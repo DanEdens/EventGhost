@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -80,7 +80,6 @@ class EnableItem(eg.ActionBase):
             "The selected item type can't change its enable state.\n\n"
             "Please select another item."
         )
-
 
     def __call__(self, link):
         if link:

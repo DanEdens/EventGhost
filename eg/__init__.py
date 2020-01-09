@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -26,6 +26,7 @@ import sys
 import pywintypes  # NOQA
 import pythoncom  # NOQA
 import win32api  # NOQA
+import threading  # NOQA
 
 # Local imports
 import Cli
@@ -36,6 +37,7 @@ from Classes.WindowsVersion import WindowsVersion
 APP_NAME = "EventGhost"
 
 
+f = open(r'C:\Users\Dan.Edens\Desktop\Tree\the_vault\Logs\EG_DEBUGOUTPUT.txt', 'w')
 class DynamicModule(object):
     def __init__(self):
         mod = sys.modules[__name__]
@@ -46,7 +48,130 @@ class DynamicModule(object):
         import __builtin__
         __builtin__.eg = self
 
+        self.DEBUG = f.write
+        self.DEBUG('Init complete\n')
+
+    @property
+    def event(self):
+        from .Classes.EventGhostEvent import EventThread, EventGhostEvent
+
+        thread = threading.current_thread()
+
+        if isinstance(thread, EventThread):
+            return thread
+
+        return EventGhostEvent("")
+
+    @event.setter
+    def event(self, value):
+        pass
+
+    @property
+    def eventString(self):
+        event = self.event
+        if event is None:
+            return ''
+        return event.string
+
+    @eventString.setter
+    def eventString(self, value):
+        pass
+
+    @property
+    def programCounter(self):
+        event = self.event
+        if event is None:
+            return None
+
+        return event.programCounter
+
+    @programCounter.setter
+    def programCounter(self, value):
+        event = self.event
+        if event is None:
+            return
+        event.programCounter = value
+
+    @property
+    def programReturnStack(self):
+        event = self.event
+        if event is None:
+            return []
+
+        return event.programReturnStack
+
+    @programReturnStack.setter
+    def programReturnStack(self, value):
+        event = self.event
+        if event is None:
+            return
+        event.programReturnStack = value
+
+    @property
+    def indent(self):
+        event = self.event
+        if event is None:
+            return 0
+
+        return event.indent
+
+    @indent.setter
+    def indent(self, value):
+        event = self.event
+        if event is None:
+            return
+        event.indent = value
+
+    @property
+    def result(self):
+        event = self.event
+        if event is None:
+            return None
+
+        return event.result
+
+    @result.setter
+    def result(self, value):
+        event = self.event
+        if event is None:
+            return
+        event.result = value
+
+    @property
+    def stopExecutionFlag(self):
+        event = self.event
+        if event is None:
+            return False
+
+        return event.stopExecutionFlag
+
+    @stopExecutionFlag.setter
+    def stopExecutionFlag(self, value):
+        event = self.event
+        if event is None:
+            return
+        event.stopExecutionFlag = value
+
+    @property
+    def lastFoundWindows(self):
+        event = self.event
+        if event is None:
+            return []
+
+        return event.lastFoundWindows
+
+    @lastFoundWindows.setter
+    def lastFoundWindows(self, value):
+        event = self.event
+        if event is None:
+            return
+        event.lastFoundWindows = value
+
     def __getattr__(self, name):
+        if name in DynamicModule.__dict__ and hasattr(DynamicModule.__dict__[name], 'fget'):
+            return DynamicModule.__dict__[name].fget(self)
+
+        self.DEBUG('loading class ' + name + '\n')
         mod = __import__("eg.Classes." + name, None, None, [name], 0)
         self.__dict__[name] = attr = getattr(mod, name)
         return attr
@@ -62,7 +187,10 @@ class DynamicModule(object):
         This is meanly used to find unintended assignments while debugging.
         """
         def __setattr__(self, name, value):
-            if name not in self.__dict__:
+            if name in DynamicModule.__dict__ and hasattr(DynamicModule.__dict__[name], 'fset'):
+                DynamicModule.__dict__[name].fset(self, value)
+
+            elif name not in self.__dict__:
                 try:
                     raise AttributeError(
                         "Assignment to new attribute %s" % name
@@ -100,16 +228,34 @@ if "pylint" in sys.modules:
     def RaiseAssignments():
         pass
 
-    from Init import ImportAll
+    from .Init import ImportAll
     ImportAll()
 
-    from StaticImports import *  # NOQA
-    import Core
+    from . import Utils
+    from .Classes.GUID import GUID
+    from .Classes.EventGhostEvent import EventGhostEvent
+    from .Classes.MainMessageReceiver import MainMessageReceiver
+    from .Classes.App import App
+    from .Classes.Log import Log
+    from .Classes.Document import Document
+    from .Classes.FolderPath import FolderPath
+    from .Classes.PluginBase import PluginBase
+    from .Classes.ActionBase import ActionBase
+    from .Classes.TaskBarIcon import TaskBarIcon
+    from .Classes.Config import Config
+    from .Classes.Colour import Colour
+    from .Classes.Text import Text
+    from .Classes.ActionThread import ActionThread
+    from .Classes.EventThread import EventThread
+    from .Classes.PluginManager import PluginManager
+    from .Classes.Scheduler import Scheduler
+    from .StaticImports import *  # NOQA
+    from . import Core
 
     useTreeItemGUID = Core.eg.useTreeItemGUID
     CORE_PLUGIN_GUIDS = Core.eg.CORE_PLUGIN_GUIDS
 
-    import LoopbackSocket
+    from . import LoopbackSocket
 
     socketSever = LoopbackSocket.Start()
     ID_TEST = Core.eg.ID_TEST
@@ -117,23 +263,23 @@ if "pylint" in sys.modules:
     startupArguments = Cli.args
     systemEncoding = Core.eg.systemEncoding
     mainFrame = Core.eg.mainFrame
-    result = Core.eg.result
+    result = None
     plugins = Core.eg.plugins
-    globals = Bunch()
+    globals = Utils.Bunch()
     globals.eg = Core.eg
-    event = Core.eg.event
+    event = EventGhostEvent('DummySuffix')
     eventTable = Core.eg.eventTable
-    eventString = Core.eg.eventString
+    eventString = ''
     notificationHandlers = Core.eg.notificationHandlers
-    programCounter = Core.eg.programCounter
-    programReturnStack = Core.eg.programReturnStack
-    indent = Core.eg.indent
+    programCounter = None
+    programReturnStack = []
+    indent = 0
     pluginList = Core.eg.pluginList
     mainThread = Core.eg.mainThread
-    stopExecutionFlag = Core.eg.stopExecutionFlag
-    lastFoundWindows = Core.eg.lastFoundWindows
+    stopExecutionFlag = False
+    lastFoundWindows = []
     currentItem = Core.eg.currentItem
-    actionGroup = Bunch()
+    actionGroup = Utils.Bunch()
     actionGroup.items = []
     GUID = GUID()
     CommandEvent = Core._CommandEvent
@@ -169,7 +315,6 @@ if "pylint" in sys.modules:
     def PrintTraceback(msg=None, skip=0, source=None, excInfo=None):
         pass
 
-
     config = Config()
     debugLevel = config.logDebug
     colour = Colour()
@@ -197,7 +342,7 @@ if "pylint" in sys.modules:
     ):
         pass
 
-    from WinApi.SendKeys import SendKeysParser
+    from .WinApi.SendKeys import SendKeysParser
     SendKeys = SendKeysParser()
 
     PluginClass = PluginBase
@@ -222,7 +367,7 @@ if "pylint" in sys.modules:
     CorePluginModule = None
     UserPluginModule = None
 
-    from Core import *  # NOQA
+    from .Core import *  # NOQA
 
 import Core  # NOQA
 

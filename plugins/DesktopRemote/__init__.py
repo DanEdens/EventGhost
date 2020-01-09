@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is a plugin for EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2018 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -54,7 +54,7 @@ class Text:
     class AddButton:
         label = "Label:"
         event = "Event:"
-        parse = "Contains Python expression:"
+
 
 class ButtonType:
     pass
@@ -279,23 +279,8 @@ class AddButton(eg.ActionBase):
     name = "Add Button"
 
     def __call__(self, kwargs):
-
-        label_parse = kwargs.pop("label_parse", False)
-        event_parse = kwargs.pop("event_parse", False)
-
-        if label_parse:
-            try:
-                kwargs['label'] = eg.ParseString(kwargs['label'])
-            except:
-                pass
-
-        if event_parse:
-            try:
-                kwargs['event'] = eg.ParseString(kwargs['event'])
-            except:
-                pass
-
         self.plugin.data.append((ButtonType, kwargs))
+
 
     def GetLabel(self, kwargs):
         return self.name + ": " + kwargs.get("label", "")
@@ -305,7 +290,6 @@ class AddButton(eg.ActionBase):
 
         def MakeOption(name, checkBox, ctrl):
             value = kwargs.get(name, None)
-
             def OnCheckBox(event):
                 ctrl.Enable(checkBox.GetValue())
                 event.Skip()
@@ -328,16 +312,10 @@ class AddButton(eg.ActionBase):
         text = self.text
 
         labelCtrl = panel.TextCtrl(kwargs.get("label", ""))
-        labelParseCtrl = panel.CheckBox(label=text.parse)
-        labelParseCtrl.SetValue(kwargs.get("label_parse", False))
-
-        panel.AddLine(text.label, labelCtrl, labelParseCtrl)
+        panel.AddLine(text.label, labelCtrl)
 
         eventCtrl = panel.TextCtrl(kwargs.get("event", ""))
-        eventParseCtrl = panel.CheckBox(label=text.parse)
-        eventParseCtrl.SetValue(kwargs.get("event_parse", False))
-
-        panel.AddLine(text.event, eventCtrl, eventParseCtrl)
+        panel.AddLine(text.event, eventCtrl)
 
         invisibleCtrl = panel.CheckBox(
             kwargs.get("invisible", False),
@@ -392,12 +370,9 @@ class AddButton(eg.ActionBase):
 
         while panel.Affirmed():
             image = kwargs.get("image", None)
-            kwargs = dict(
-                label=labelCtrl.GetValue(),
-                label_parse=labelParseCtrl.GetValue(),
-                event=eventCtrl.GetValue(),
-                event_parse=eventParseCtrl.GetValue()
-            )
+            kwargs = {}
+            kwargs["label"] = labelCtrl.GetValue()
+            kwargs["event"] = eventCtrl.GetValue()
             fontInfo()
             foregroundColour()
             backgroundColour()

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -31,18 +31,7 @@ import PythonPaths
 import LoopbackSocket
 
 ENCODING = locale.getdefaultlocale()[1]
-
-# Starting with Windows 10 build 1809 (I think) the behavior of setlocal has
-# changed. I believe they may have fixed a bug in setlocale that required the
-# passing of an empty string instead of NULL. So now we have to try both ways.
-
-try:
-    locale.setlocale(locale.LC_ALL, '')
-except locale.Error:
-    # Windows 10 build >= 1809
-    locale.setlocale(locale.LC_ALL, None)
-
-
+locale.setlocale(locale.LC_ALL, '')
 argvIter = (val.decode(ENCODING) for val in sys.argv)
 scriptPath = argvIter.next()
 
@@ -69,9 +58,7 @@ class args:
 
 def restart():
     if send_message('eg.document.IsDirty') is True:
-        answer = send_message('eg.document.Save')
-
-x = """        answer = ctypes.windll.user32.MessageBoxA(
+        answer = ctypes.windll.user32.MessageBoxA(
             0,
             'EventGhost cannot restart.             \n\n'
             'Configuration contains unsaved changes.\n'
@@ -102,7 +89,7 @@ x = """        answer = ctypes.windll.user32.MessageBoxA(
         sys.exit(1)
 
     return True
-"""
+
 
 def send_message(msg, *msg_args):
 

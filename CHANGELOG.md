@@ -1,25 +1,3 @@
-## [WIP-2019.04.14-12.39.31](https://github.com/EventGhost/EventGhost/releases/tag/vWIP-2019.04.14-12.39.31) (2019-04-14)
-
-**Enhancements:**
-
-* \[VLC\] add 64 bit support, fix play, volup and voldown [\#341](https://github.com/EventGhost/EventGhost/pull/341) ([GruberMarkus](https://github.com/GruberMarkus))
-* \[EventGhost\] TriggerEvent: option to remove the 'Main' prefix [\#355](https://github.com/EventGhost/EventGhost/pull/355) ([kdschlosser](https://github.com/kdschlosser))
-* Add hotkey to clear logpanel \(suggested by Snowbird\) [\#368](https://github.com/EventGhost/EventGhost/pull/368) ([topic2k](https://github.com/topic2k))
-* enable OK button for config dialog without options [\#375](https://github.com/EventGhost/EventGhost/pull/375) ([topic2k](https://github.com/topic2k))
-* \[Window\] add actions to determine window state [\#380](https://github.com/EventGhost/EventGhost/pull/380) ([topic2k](https://github.com/topic2k))
-
-**Fixed bugs:**
-
-* Fix right click on empty space in log didn't show context menu [\#353](https://github.com/EventGhost/EventGhost/pull/353) ([topic2k](https://github.com/topic2k))
-* Fix issue when locale has no translation \(OptionsDialog.py\), and right to left bug on \(SpinNumCtrl.py\) [\#356](https://github.com/EventGhost/EventGhost/pull/356) ([thecode](https://github.com/thecode))
-* ConfigPanel.py: Enables Apply button on first configure [\#367](https://github.com/EventGhost/EventGhost/pull/367) ([kdschlosser](https://github.com/kdschlosser))
-* setting locale when Windows has no LCID for user selected locale settings [\#373](https://github.com/EventGhost/EventGhost/pull/373) ([kdschlosser](https://github.com/kdschlosser))
-
-**Other changes:**
-
-* \[Atric IR-WakeupUSB\] New plugin [\#342](https://github.com/EventGhost/EventGhost/pull/342) ([GruberMarkus](https://github.com/GruberMarkus))
-
-
 ## [0.5.0-rc6](https://github.com/EventGhost/EventGhost/releases/tag/v0.5.0-rc6) (2018-12-24)
 
 **Enhancements:**
