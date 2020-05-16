@@ -284,7 +284,6 @@ class MainFrame(wx.Frame):
         Append("New", "\tCtrl+N")
         Append("Open", "\tCtrl+O")
         Append("Save", "\tCtrl+S").Enable(False)
-        Append("VersionUp", "\tShift+Ctrl+S")
         Append("SaveAs")
         menu.AppendSeparator()
         Append("Options", "\tCtrl+P")
@@ -950,9 +949,6 @@ class MainFrame(wx.Frame):
     def OnCmdSaveAs(self):
         self.document.SaveAs()
 
-    def OnCmdVersionUp(self):
-        self.document.VersionUp()
-
     def OnCmdEditconfig(self):
         eg.plugins.EventGhost.TriggerEvent(u'editEGconfig', 0.1, None, False, False, False)
 
@@ -1018,6 +1014,8 @@ class MainFrame(wx.Frame):
     #---- View ---------------------------------------------------------------
     def OnCmdHideShowToolbar(self):
         Config.showToolbar = not Config.showToolbar
+        #self.auiManager.GetPane("toolBar").Show(Config.showToolbar)
+        #self.auiManager.Update()
         self.toolBar.Show(Config.showToolbar)
         self.Layout()
         self.SendSizeEvent()

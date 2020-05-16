@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -190,10 +190,7 @@ class Log(object):
         """
         if eg.debugLevel:
             msg = _build_notice(DEBUG_ICON, args)
-            try:
-                self.Write(msg, DEBUG_ICON)
-            except:
-                pass
+            self.Write(msg, DEBUG_ICON)
 
     def PrintWarningNotice(self, *args):
         """
