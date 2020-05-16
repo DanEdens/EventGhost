@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -18,6 +18,7 @@
 
 import types
 import wx
+from inspect import currentframe, getargvalues, getouterframes
 
 # Local imports
 import eg
@@ -51,9 +52,14 @@ class ConfigPanel(wx.PyPanel, eg.ControlProviderMixin):
         self.isDirty = False
         self.resultCode = None
         self.buttonsEnabled = True
-        self.dialog.buttonRow.applyButton.Enable(False)
+        outer = getouterframes(currentframe())
+        has_args = len(getargvalues(outer[1][0]).args) > 1
+        self.dialog.buttonRow.applyButton.Enable(
+            has_args and self.dialog.treeItem.isFirstConfigure
+        )
         self.dialog.buttonRow.okButton.Enable(
-            not self.dialog.treeItem.isFirstConfigure
+            not has_args or
+            not (has_args and self.dialog.treeItem.isFirstConfigure)
         )
 
     def AddCtrl(self, ctrl):
@@ -149,6 +155,7 @@ class ConfigPanel(wx.PyPanel, eg.ControlProviderMixin):
         self.Bind(eg.EVT_VALUE_CHANGED, OnEvent)
         self.Bind(wx.EVT_CHECKLISTBOX, OnEvent)
         self.Bind(wx.EVT_SCROLL, OnEvent)
+        self.Bind(wx.EVT_LISTBOX, OnEvent)
 
     def SetColumnFlags(self, colNum, flags):
         self.colFlags[colNum] = flags

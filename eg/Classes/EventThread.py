@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -111,12 +111,11 @@ class EventThread(ThreadWorker):
             for filterFunc in self.filters[event.source]:
                 if filterFunc(event) is True:
                     return event
-        event.Execute()
-        event.SetShouldEnd()
-        # def Transfer():
-        #     ActionThreadCall(event.Execute)
-        #     event.SetShouldEnd()
-        # self.AppendAction(Transfer)
+
+        def Transfer():
+            ActionThreadCall(event.Execute)
+            event.SetShouldEnd()
+        self.AppendAction(Transfer)
 
         return event
 

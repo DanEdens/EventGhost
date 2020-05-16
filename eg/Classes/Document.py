@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -26,13 +26,11 @@ from xml.etree import cElementTree as ElementTree
 # Local imports
 import eg
 
-
 class Document(object):
     def __init__(self):
         class ItemMixin:
             document = self
             root = None
-
         self.ItemMixin = ItemMixin
         itemNamespace = {}
         self.XMLTag2ClassDict = {}
@@ -44,8 +42,8 @@ class Document(object):
             return cls
 
         self.TreeLink = eg.TreeLink
-        #        self.TreeItem = MakeCls("TreeItem")
-        #        self.ContainerItem = MakeCls("ContainerItem")
+#        self.TreeItem = MakeCls("TreeItem")
+#        self.ContainerItem = MakeCls("ContainerItem")
         self.EventItem = MakeCls("EventItem")
         self.ActionItem = MakeCls("ActionItem")
         self.PluginItem = MakeCls("PluginItem")
@@ -70,10 +68,15 @@ class Document(object):
         self.visibleLogItem = 0
 
     def AfterLoad(self):
-        if (TreeStateData.guid == self.root.guid and TreeStateData.time == self.root.time):
+        if (
+            TreeStateData.guid == self.root.guid and
+            TreeStateData.time == self.root.time
+        ):
             self.SetExpandState(TreeStateData.expanded)
             self.selection = self.FindItemWithPath(TreeStateData.selection)
-            self.firstVisibleItem = self.FindItemWithPath(TreeStateData.firstVisibleItem)
+            self.firstVisibleItem = self.FindItemWithPath(
+                TreeStateData.firstVisibleItem
+            )
         else:
             self.selection = self.root
             self.firstVisibleItem = self.root
@@ -87,10 +90,15 @@ class Document(object):
         self.undoId += 1
         del self.stockRedo[:]
         self.SetIsDirty()
-        self.SetUndoState((True, False, ": "+handler.name, ""))
+        self.SetUndoState((True, False, ": " + handler.name, ""))
 
     def AskFile(self, style):
-        fileDialog = wx.FileDialog(self.frame, message="", wildcard="EventGhost Tree (*.egtree; *.xml)|*.egtree;*.xml", style=style)
+        fileDialog = wx.FileDialog(
+            self.frame,
+            message="",
+            wildcard="EventGhost Tree (*.egtree; *.xml)|*.egtree;*.xml",
+            style=style
+        )
         try:
             if fileDialog.ShowModal() == wx.ID_CANCEL:
                 return None
@@ -111,7 +119,15 @@ class Document(object):
         """
         if not self.isDirty:
             return wx.ID_OK
-        return self.Save()  # dialog = SaveChangesDialog(self.frame)  # result = dialog.ShowModal()  # dialog.Destroy()  # if result == wx.ID_CANCEL:  # return wx.ID_CANCEL  # elif result == wx.ID_YES:  # return self.Save()  # else:  # return wx.ID_NO
+        dialog = SaveChangesDialog(self.frame)
+        result = dialog.ShowModal()
+        dialog.Destroy()
+        if result == wx.ID_CANCEL:
+            return wx.ID_CANCEL
+        elif result == wx.ID_YES:
+            return self.Save()
+        else:
+            return wx.ID_NO
 
     def IsDirty(self):
         return self.isDirty
@@ -156,8 +172,11 @@ class Document(object):
             return
         result = eg.AddEventDialog.GetResult(self.frame)
         if result is None:
-            return
-        return eg.UndoHandler.NewEvent(self).Do(self.selection, label=result[0])
+           return
+        return eg.UndoHandler.NewEvent(self).Do(
+            self.selection,
+            label=result[0]
+        )
 
     @eg.AssertInMainThread
     def CmdAddFolder(self):
@@ -261,7 +280,6 @@ class Document(object):
                 for child in item.childs:
                     i = Traverse(child, i)
             return i
-
         Traverse(self.root, -1)
 
         return expanded
@@ -290,7 +308,9 @@ class Document(object):
                     if logCtrl.IsAutoscroll():
                         self.visibleLogItem = 0
                     else:
-                        self.visibleLogItem = (logCtrl.GetTopItem()+logCtrl.GetCountPerPage())
+                        self.visibleLogItem = (
+                            logCtrl.GetTopItem() + logCtrl.GetCountPerPage()
+                        )
 
                         if self.visibleLogItem:
                             self.visibleLogItem -= 1
@@ -306,8 +326,8 @@ class Document(object):
         if filePath is None:
             return self.LoadEmpty()
         self.ResetUndoState()
-        #        if self.root:
-        #            self.root.Delete()
+#        if self.root:
+#            self.root.Delete()
         if not filePath:
             filePath = os.path.join(eg.mainDir, "Example.egtree")
             self.SetFilePath(False)
@@ -329,8 +349,8 @@ class Document(object):
     @eg.LogIt
     def LoadEmpty(self):
         self.ResetUndoState()
-        #        if self.root:
-        #            self.root.Delete()
+#        if self.root:
+#            self.root.Delete()
         self.SetFilePath(None)
         eg.TreeLink.StartLoad()
         node = ElementTree.Element("EventGhost")
@@ -357,7 +377,12 @@ class Document(object):
     def Open(self, filePath=None):
         self.ShowFrame()
         if filePath is not None:
-            res = wx.MessageBox("Do you really want to load the tree file:\n%s" % filePath, eg.APP_NAME, wx.YES_NO | wx.CENTRE | wx.ICON_QUESTION, parent=self.frame, )
+            res = wx.MessageBox(
+                "Do you really want to load the tree file:\n%s" % filePath,
+                eg.APP_NAME,
+                wx.YES_NO | wx.CENTRE | wx.ICON_QUESTION,
+                parent = self.frame,
+            )
             if res == wx.ID_NO:
                 return wx.ID_CANCEL
         if self.CheckFileNeedsSave() == wx.ID_CANCEL:
@@ -379,12 +404,12 @@ class Document(object):
         self.SetIsDirty(self.undoId != self.undoIdOnSave)
         self.stockUndo.append(handler)
         if len(self.stockRedo):
-            redoName = ": "+self.stockRedo[-1].name
+            redoName = ": " + self.stockRedo[-1].name
             hasRedo = True
         else:
             redoName = ""
             hasRedo = False
-        self.SetUndoState((True, hasRedo, ": "+handler.name, redoName))
+        self.SetUndoState((True, hasRedo, ": " + handler.name, redoName))
 
     def ResetUndoState(self):
         del self.stockUndo[:]
@@ -418,12 +443,6 @@ class Document(object):
             return wx.ID_CANCEL
         self.WriteFile(filePath)
         self.SetFilePath(filePath)
-        tmp = self.filePath[-33:]
-        print "Version "+str(eg.globals.version)+" Saved at "+tmp
-        return wx.ID_YES
-
-    def VersionUp(self):
-        os.system("cd C:\Users\Dan.Edens\Desktop\Tree\Drive\Ghost\ && git add --all && git commit -m 'autosave' && git push")
         return wx.ID_YES
 
     @eg.LogIt
@@ -441,7 +460,6 @@ class Document(object):
                 for child in item.childs:
                     i = Traverse(child, i)
             return i
-
         Traverse(self.root, -1)
 
     def SetFilePath(self, filePath):
@@ -513,12 +531,12 @@ class Document(object):
         self.SetIsDirty(self.undoId != self.undoIdOnSave)
         self.stockRedo.append(handler)
         if len(self.stockUndo):
-            undoName = ": "+self.stockUndo[-1].name
+            undoName = ": " + self.stockUndo[-1].name
             hasUndo = True
         else:
             undoName = ""
             hasUndo = False
-        self.SetUndoState((hasUndo, True, undoName, ": "+handler.name))
+        self.SetUndoState((hasUndo, True, undoName, ": " + handler.name))
 
     def WriteFile(self, filePath):
         success = False
@@ -546,10 +564,14 @@ class SaveChangesDialog(wx.Dialog):
     def __init__(self, parent=None):
         text = eg.text.MainFrame.SaveChanges
         wx.Dialog.__init__(self, parent, title=eg.APP_NAME)
-        bmp = wx.ArtProvider.GetBitmap(wx.ART_WARNING, wx.ART_CMN_DIALOG, (32, 32))
+        bmp = wx.ArtProvider.GetBitmap(
+            wx.ART_WARNING, wx.ART_CMN_DIALOG, (32, 32)
+        )
         staticBitmap = wx.StaticBitmap(self, -1, bmp)
 
-        messageCtrl = wx.StaticText(self, -1, eg.text.MainFrame.SaveChanges.mesg)
+        messageCtrl = wx.StaticText(
+            self, -1, eg.text.MainFrame.SaveChanges.mesg
+        )
         messageCtrl.Wrap(400)
         saveButton = wx.Button(self, wx.ID_YES, text.saveButton)
         saveButton.Bind(wx.EVT_BUTTON, self.OnButton)
