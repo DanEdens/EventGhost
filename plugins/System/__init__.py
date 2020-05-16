@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -102,15 +102,15 @@ def GetDeviceId_(*args, **kwargs):
     return id.encode(eg.systemEncoding) if not isinstance(id, int) else id
 SoundMixer.GetDeviceId = GetDeviceId_
 
-
 EVENT_LIST = (
-    ("*.", None),
-    ("*.code?", None),
-    ("*.job?", None),
-    ("Main.", None),
-    ("Keyboard.", None),
-    ("*.kill?", None),
+    ("Idle", None),
+    ("UnIdle", None),
+    ("DriveMounted", None),
+    ("DriveRemoved", None),
+    ("DeviceAttached", None),
+    ("DeviceRemoved", None),
 )
+
 MONITOR_STATES = dict(
     OFF=2,
     STANDBY=1,
@@ -1021,7 +1021,7 @@ class ShowPictureFrame(wx.Frame):
             "ShowPictureFrame",
             style=wx.NO_BORDER | wx.FRAME_NO_TASKBAR  #| wx.STAY_ON_TOP
         )
-        self.SetBackgroundColour(wx.Colour(195, 195, 195))
+        self.SetBackgroundColour(wx.Colour(0, 0, 0))
         self.Bind(wx.EVT_LEFT_DCLICK, self.LeftDblClick)
         self.Bind(wx.EVT_CLOSE, self.OnClose)
         bitmap = wx.EmptyBitmap(1, 1)

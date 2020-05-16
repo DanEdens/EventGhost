@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -31,7 +31,18 @@ import PythonPaths
 import LoopbackSocket
 
 ENCODING = locale.getdefaultlocale()[1]
-locale.setlocale(locale.LC_ALL, '')
+
+# Starting with Windows 10 build 1809 (I think) the behavior of setlocal has
+# changed. I believe they may have fixed a bug in setlocale that required the
+# passing of an empty string instead of NULL. So now we have to try both ways.
+
+try:
+    locale.setlocale(locale.LC_ALL, '')
+except locale.Error:
+    # Windows 10 build >= 1809
+    locale.setlocale(locale.LC_ALL, None)
+
+
 argvIter = (val.decode(ENCODING) for val in sys.argv)
 scriptPath = argvIter.next()
 
@@ -106,7 +117,7 @@ if args.isMain:
         arg = arg.lower()
 
         if arg in ('-e', '-event'):
-            eventstring = argvIter.next()
+            eventstring = str(argvIter.next())
             payloads = list()
             for payload in argvIter:
                 if payload.startswith('-'):
@@ -116,7 +127,18 @@ if args.isMain:
 
             if len(payloads) == 0:
                 payloads = None
-            args.startupEvent = (str(eventstring), payloads)
+
+            if '.' not in eventstring:
+                prefix = 'Main'
+                suffix = eventstring
+            else:
+                prefix, suffix = eventstring.split('.', 1)
+            
+            args.startupEvent = (
+                suffix,
+                payloads,
+                prefix
+            )
 
         if arg.startswith('-debug'):
             args.debugLevel = 1

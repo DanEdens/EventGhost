@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -75,9 +75,11 @@ def ImportAll():
     Traverse(join(eg.mainDir, "eg"), "eg")
     Traverse(eg.corePluginDir, "eg.CorePluginModule")
 
+
 def Init():
-    import WinApi.pywin32_patches # NOQA
-    import WinApi.wx_patches # NOQA
+    import WinApi.locale_patches  # NOQA
+    import WinApi.pywin32_patches  # NOQA
+    import WinApi.wx_patches  # NOQA
     import WinApi.GenPaths  # NOQA
 
 
@@ -110,7 +112,7 @@ def InitGui():
         startupFile = config.autoloadFilePath
     if startupFile and not exists(startupFile):
         eg.PrintError(eg.text.Error.FileNotFound % startupFile)
-        startupFile = eg.text.Error.FallbackConfig
+        startupFile = None
 
     eg.eventThread.Start()
     wx.CallAfter(

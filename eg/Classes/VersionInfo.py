@@ -1,4 +1,4 @@
-string = 'WIP-2019.12.07-08.20.58'
+string = 'WIP-2020.05.11-06.47.41'
 base = 'WIP'
 major = 0
 minor = 0
@@ -6,4 +6,4 @@ patch = 0
 alpha = 0
 beta = 0
 rc = 0
-buildTime = 1575732058.13
+buildTime = 1589179661.41

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -66,13 +66,21 @@ eg.debugLevel = eg.startupArguments.debugLevel
 eg.systemEncoding = locale.getdefaultlocale()[1]
 eg.document = None
 eg.mainFrame = None
+eg.result = None
 eg.plugins = eg.Bunch()
 eg.globals = eg.Bunch()
 eg.globals.eg = eg
+eg.event = None
 eg.eventTable = {}
+eg.eventString = ""
 eg.notificationHandlers = {}
+eg.programCounter = None
+eg.programReturnStack = []
+eg.indent = 0
 eg.pluginList = []
 eg.mainThread = threading.currentThread()
+eg.stopExecutionFlag = False
+eg.lastFoundWindows = []
 eg.currentItem = None
 eg.actionGroup = eg.Bunch()
 eg.actionGroup.items = []
@@ -325,36 +333,31 @@ eg.app = eg.App()
 import Icons  # NOQA
 eg.Icons = Icons
 
-try:
-    eg.log = eg.Log()
-    eg.Print = eg.log.Print
-    eg.PrintError = eg.log.PrintError
-    eg.PrintNotice = eg.log.PrintNotice
-    eg.PrintTraceback = eg.log.PrintTraceback
-    eg.PrintDebugNotice = eg.log.PrintDebugNotice
-    eg.PrintWarningNotice = eg.log.PrintWarningNotice
-    eg.PrintStack = eg.log.PrintStack
-    
-    eg.config = eg.Config()
-    eg.debugLevel = int(eg.config.logDebug) or eg.debugLevel
-    
-    def TracebackHook(tType, tValue, traceback):
-        eg.log.PrintTraceback(excInfo=(tType, tValue, traceback))
-    sys.excepthook = TracebackHook
-    
-    eg.colour = eg.Colour()
-    if eg.startupArguments.isMain and not eg.startupArguments.translate:
-        eg.text = eg.Text(eg.config.language)
-    else:
-        eg.text = eg.Text('en_EN')
-    eg.actionThread = eg.ActionThread()
-    eg.eventThread = eg.EventThread()
-    eg.pluginManager = eg.PluginManager()
-    eg.scheduler = eg.Scheduler()
-except:
-    import traceback
-    eg.DEBUG(traceback.format_exc())
-    raise
+eg.log = eg.Log()
+eg.Print = eg.log.Print
+eg.PrintError = eg.log.PrintError
+eg.PrintNotice = eg.log.PrintNotice
+eg.PrintTraceback = eg.log.PrintTraceback
+eg.PrintDebugNotice = eg.log.PrintDebugNotice
+eg.PrintWarningNotice = eg.log.PrintWarningNotice
+eg.PrintStack = eg.log.PrintStack
+
+eg.config = eg.Config()
+eg.debugLevel = int(eg.config.logDebug) or eg.debugLevel
+
+def TracebackHook(tType, tValue, traceback):
+    eg.log.PrintTraceback(excInfo=(tType, tValue, traceback))
+sys.excepthook = TracebackHook
+
+eg.colour = eg.Colour()
+if eg.startupArguments.isMain and not eg.startupArguments.translate:
+    eg.text = eg.Text(eg.config.language)
+else:
+    eg.text = eg.Text('en_EN')
+eg.actionThread = eg.ActionThread()
+eg.eventThread = eg.EventThread()
+eg.pluginManager = eg.PluginManager()
+eg.scheduler = eg.Scheduler()
 
 eg.TriggerEvent = eg.eventThread.TriggerEvent
 eg.TriggerEnduringEvent = eg.eventThread.TriggerEnduringEvent

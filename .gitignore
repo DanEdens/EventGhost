@@ -23,3 +23,5 @@ EventGhost.exe.log
 **/vcs.xml
 **/workspace.xml
 .i
+*.pyd
+*.dll

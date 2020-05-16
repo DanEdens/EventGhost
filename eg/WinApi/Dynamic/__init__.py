@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2016 EventGhost Project <http://www.eventghost.org/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -108,6 +108,9 @@ IsWindow.argtypes = [HWND]
 IsIconic = _user32.IsIconic
 IsIconic.restype = BOOL
 IsIconic.argtypes = [HWND]
+IsZoomed = _user32.IsZoomed
+IsZoomed.restype = BOOL
+IsZoomed.argtypes = [HWND]
 GetStockObject = _gdi32.GetStockObject
 GetStockObject.restype = HGDIOBJ
 GetStockObject.argtypes = [c_int]
