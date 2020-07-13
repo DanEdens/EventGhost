@@ -73,6 +73,8 @@ class App(wx.App):
                 while not egEvent.isEnded:
                     self.Yield()
             wx.CallAfter(DoOnClose)
+        import os
+        os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\post.bat status\\ghost offline")
         self.ExitMainLoop()
         return True
 
@@ -157,7 +159,9 @@ class App(wx.App):
         else:
             self.Bind(wx.EVT_QUERY_END_SESSION, self.OnQueryEndSessionXp)
         self.Bind(wx.EVT_END_SESSION, self.OnEndSession)
-
+        # import os
+        # os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\post.bat status\\ghost online")
+        # eg.plugins.MQTTthreads.publishMQTT(u'', u'3.134.3.199', 1884, u'status\\ghost', u'online', 0, True, '562815611203', False, u'ubuntu', u'geoint31', False, u'', u'', u'', u'TLSv1.2')
         return True
 
     @eg.LogItWithReturn

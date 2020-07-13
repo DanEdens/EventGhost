@@ -91,6 +91,8 @@ class DynamicModule(object):
                 eg.PrintDebugNotice(sys.exc_info()[1])
         eg.Tasklet(eg.app.MainLoop)().run()
         stackless.run()
+        eg.plugins.MQTTthreads.publishMQTT(u'', u'3.134.3.199', 1884, u'status\\ghost', u'online', 0, True, '562815611203', False, u'ubuntu', u'geoint31', False, u'', u'', u'', u'TLSv1.2')
+
 
 
 eg = DynamicModule()
