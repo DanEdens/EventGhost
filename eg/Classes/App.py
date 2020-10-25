@@ -16,6 +16,7 @@
 # You should have received a copy of the GNU General Public License along
 # with EventGhost. If not, see <http://www.gnu.org/licenses/>.
 
+import os
 import sys
 import threading
 import time
@@ -73,8 +74,7 @@ class App(wx.App):
                 while not egEvent.isEnded:
                     self.Yield()
             wx.CallAfter(DoOnClose)
-        import os
-        os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\post.bat status\\ghost offline")
+        os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\rost.bat status/ghost/log %DATE%=:=%TIME%=:=Offline")
         self.ExitMainLoop()
         return True
 
@@ -159,9 +159,7 @@ class App(wx.App):
         else:
             self.Bind(wx.EVT_QUERY_END_SESSION, self.OnQueryEndSessionXp)
         self.Bind(wx.EVT_END_SESSION, self.OnEndSession)
-        # import os
-        # os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\post.bat status\\ghost online")
-        # eg.plugins.MQTTthreads.publishMQTT(u'', u'3.134.3.199', 1884, u'status\\ghost', u'online', 0, True, '562815611203', False, u'ubuntu', u'geoint31', False, u'', u'', u'', u'TLSv1.2')
+        os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\rost.bat status/ghost/log %DATE%=:=%TIME%=:=Connected")
         return True
 
     @eg.LogItWithReturn
