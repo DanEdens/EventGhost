@@ -207,7 +207,7 @@ class App(wx.App):
         self.firstQuery = True
         ShutdownBlockReasonDestroy(self.hwnd)
 
-    def Restart(self, asAdmin=False):
+    def Restart(self, asAdmin=True):
         def Do():
             from eg.WinApi.PipedProcess import RunAs
 

@@ -101,7 +101,7 @@ class PythonEditorCtrl(StyledTextCtrl):
         self.SetIndentationGuides(True)   # Show indent guides
         self.SetBackSpaceUnIndents(True)  # Backspace unindents rather than
                                           # delete 1 space
-        self.SetTabIndents(True)          # Tab key indents
+        self.SetTabIndents(False)          # Tab key indents
         self.SetUseTabs(False)            # Use spaces rather than tabs, or
                                           # TabTimmy will complain!
         # White space
