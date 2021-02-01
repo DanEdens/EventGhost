@@ -534,7 +534,7 @@ class PythonEditorCtrl(StyledTextCtrl):
                 indentSize = len(match.group())
         self.SetIndent(indentSize)
         self.SetTabWidth(indentSize)
-        return indentSize
+        return 4
 
     def SetValue(self, value):
         self.SetText(value)
