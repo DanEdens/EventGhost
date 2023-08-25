@@ -74,7 +74,7 @@ class App(wx.App):
                 while not egEvent.isEnded:
                     self.Yield()
             wx.CallAfter(DoOnClose)
-        os.system("C:\\Users\\Dan.Edens\\Desktop\\Tree\\the_vault\\Scripts\\_Main\\DOS\\rost.bat status/ghost/log %DATE%=:=%TIME%=:=Offline")
+        os.system("rost.cmd status/%DENA%/log %DATE%=:=%TIME%=:=Offline")
         self.ExitMainLoop()
         return True
 
@@ -222,4 +222,4 @@ class App(wx.App):
             return eg.CallWait(Do)
 
     def RestartAsAdmin(self):
-        self.Restart(asAdmin=True)
+        self.Restart()
