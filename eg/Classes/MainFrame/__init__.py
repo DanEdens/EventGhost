@@ -72,6 +72,7 @@ class Config(eg.PersistentData):
     perspective = None
     perspective2 = None
     ratio = 2.0
+    theme = "default"  # Can be "default", "dark", "light" etc.
 
 
 class MainFrame(wx.Frame):
@@ -229,6 +230,7 @@ class MainFrame(wx.Frame):
         self.SetAcceleratorTable(self.acceleratorTable)
         self.logCtrl.Bind(wx.EVT_SIZE, self.OnLogCtrlSize)
         eg.EnsureVisible(self)
+        self.ApplyTheme(Config.theme)
 
     if eg.debugLevel:
         @eg.LogIt
@@ -323,6 +325,20 @@ class MainFrame(wx.Frame):
         Append("HideShowToolbar", kind=wx.ITEM_CHECK).Check(Config.showToolbar)
         Append("TogAtop", kind=wx.ITEM_CHECK).Check(Config.TogAtop)
         menu.AppendSeparator()
+        
+        # Add Theme submenu
+        themeMenu = wx.Menu()
+        themeMenu.AppendRadioItem(wx.NewId(), "Default")
+        themeMenu.AppendRadioItem(wx.NewId(), "Dark")
+        themeMenu.AppendRadioItem(wx.NewId(), "Light")
+        menu.AppendSubMenu(themeMenu, "Theme")
+        
+        # Bind theme menu events
+        for item in themeMenu.GetMenuItems():
+            self.Bind(wx.EVT_MENU, self.OnThemeSelect, item)
+            if item.GetItemLabelText().lower() == Config.theme:
+                item.Check(True)
+        
         Append("Expand", image=GetInternalBitmap("expand"))
         Append("Collapse", image=GetInternalBitmap("collapse"))
         Append("ExpandChilds", image=GetInternalBitmap("expand_children"))
@@ -1387,3 +1403,54 @@ class MainFrame(wx.Frame):
     @eg.LogItWithReturn
     def OnCmdAbout(self):
         eg.AboutDialog.GetResult(self)
+
+    def OnThemeSelect(self, event):
+        """Handle theme selection from menu"""
+        item = event.GetEventObject().FindItemById(event.GetId())
+        theme = item.GetItemLabelText().lower()
+        Config.theme = theme
+        self.ApplyTheme(theme)
+
+    def ApplyTheme(self, theme):
+        """Apply the selected theme to the UI"""
+        if theme == "dark":
+            colors = {
+                "background": wx.Colour(40, 40, 40),
+                "foreground": wx.Colour(230, 230, 230),
+                "highlight": wx.Colour(60, 60, 60),
+                "selection": wx.Colour(70, 70, 70)
+            }
+        elif theme == "light":
+            colors = {
+                "background": wx.Colour(240, 240, 240),
+                "foreground": wx.Colour(0, 0, 0),
+                "highlight": wx.Colour(220, 220, 220),
+                "selection": wx.Colour(200, 200, 200)
+            }
+        else:  # default theme
+            colors = {
+                "background": wx.SystemSettings.GetColour(wx.SYS_COLOUR_WINDOW),
+                "foreground": wx.SystemSettings.GetColour(wx.SYS_COLOUR_WINDOWTEXT),
+                "highlight": wx.SystemSettings.GetColour(wx.SYS_COLOUR_3DLIGHT),
+                "selection": wx.SystemSettings.GetColour(wx.SYS_COLOUR_HIGHLIGHT)
+            }
+
+        # Apply colors to main components
+        self.SetBackgroundColour(colors["background"])
+        self.SetForegroundColour(colors["foreground"])
+        
+        # Apply to tree control
+        self.treeCtrl.SetBackgroundColour(colors["background"])
+        self.treeCtrl.SetForegroundColour(colors["foreground"])
+        
+        # Apply to log control
+        self.logCtrl.SetBackgroundColour(colors["background"])
+        self.logCtrl.SetForegroundColour(colors["foreground"])
+        
+        # Apply to status bar
+        self.statusBar.SetBackgroundColour(colors["background"])
+        self.statusBar.SetForegroundColour(colors["foreground"])
+        
+        # Refresh everything
+        self.Refresh()
+        self.Update()
