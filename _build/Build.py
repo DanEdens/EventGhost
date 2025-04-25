@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -20,7 +20,7 @@
 This script creates the EventGhost setup installer.
 """
 
-from os.path import dirname, exists, join
+from os.path import dirname, exists, join, abspath
 
 # Local imports
 import builder
@@ -34,11 +34,11 @@ class MyBuilder(builder.Builder):
     name = "EventGhost"
     description = "EventGhost Automation Tool"
     companyName = "EventGhost Project"
-    copyright = u"Copyright © 2005-2019 EventGhost Project"
+    copyright = u"Copyright © 2005-2020 EventGhost Project"
     mainScript = "EventGhost.pyw"
 
     includeModules = [
-        "CommonMark",
+        "commonmark",
         "comtypes",
         "Crypto",
         "docutils",
@@ -133,6 +133,10 @@ class MyBuilder(builder.Builder):
             join(self.tmpDir, "VersionInfo.py"),
             destDir="eg\\Classes"
         )
+        line = 'Source: "%s"; DestDir: "{tmp}"; Flags: deleteafterinstall' % (
+            abspath(join(self.dataDir, "vcredist_x86.exe"))
+        )
+        inno.Add("Files", line)
 
         inno.ExecuteInnoSetup()
 

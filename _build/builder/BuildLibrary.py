@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -24,7 +24,7 @@ from os.path import basename, exists, join
 
 # Local imports
 import builder
-from builder.Utils import EncodePath
+from builder.Utils import EncodePath, ParseVersion
 
 
 _compile = __builtin__.compile
@@ -153,13 +153,14 @@ class Target:
         manifest = file(
             join(buildSetup.pyVersionDir, "Manifest.xml")
         ).read() % buildSetup.__dict__
+        v = ParseVersion(buildSetup.appVersion)
         self.other_resources = [(RT_MANIFEST, 1, manifest)]
         self.name = buildSetup.name
         self.description = buildSetup.description
         self.company_name = buildSetup.companyName
         self.copyright = buildSetup.copyright
         self.dest_base = buildSetup.name
-        self.version = buildSetup.appVersion
+        self.version = ".".join(v[1][:3])
         self.script = join(buildSetup.sourceDir, buildSetup.mainScript)
 
 

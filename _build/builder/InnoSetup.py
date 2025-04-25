@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -95,7 +95,19 @@ def GetInnoCompilerPath():
         installPath = _winreg.QueryValueEx(key, "InstallLocation")[0]
         _winreg.CloseKey(key)
     except WindowsError:
-        return None
+        try:
+            key = _winreg.OpenKey(
+                _winreg.HKEY_LOCAL_MACHINE,
+                (
+                    "SOFTWARE\\Microsoft\\WOW6432Node\\Windows\\CurrentVersion\\"
+                    "Uninstall\\Inno Setup 5_is1"
+                )
+            )
+            installPath = _winreg.QueryValueEx(key, "InstallLocation")[0]
+            _winreg.CloseKey(key)
+        except WindowsError:
+            return None
+
     installPath = join(installPath, "ISCC.exe")
     if not exists(installPath):
         return None

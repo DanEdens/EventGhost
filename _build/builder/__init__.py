@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of EventGhost.
-# Copyright © 2005-2019 EventGhost Project <http://www.eventghost.net/>
+# Copyright © 2005-2020 EventGhost Project <http://www.eventghost.net/>
 #
 # EventGhost is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free
@@ -104,7 +104,7 @@ class Builder(object):
             self.args.sync
         )
         if os.environ.get(
-                "APPVEYOR_REPO_COMMIT_MESSAGE", ""
+            "APPVEYOR_REPO_COMMIT_MESSAGE", ""
         ).upper().startswith("VERBOSE:"):
             self.args.verbose = True
 
@@ -134,7 +134,7 @@ class Builder(object):
                 token = ""
                 print msg
             else:
-                token = os.environ["GITHUB_TOKEN"]
+                token = os.environ.get("GITHUB_TOKEN")
             self.gitConfig = {
                 "all_repos": {
                     "EventGhost/EventGhost": {

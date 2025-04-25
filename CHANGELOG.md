@@ -1,4 +1,4 @@
-## [WIP-2020.05.11-06.47.41](https://github.com/EventGhost/EventGhost/releases/tag/vWIP-2020.05.11-06.47.41) (2020-05-11)
+## [0.5.0-rc7](https://github.com/EventGhost/EventGhost/releases/tag/v0.5.0-rc7) (2025-02-01)
 
 **Enhancements:**
 
@@ -17,6 +17,7 @@
 * Fixes traceback when opening options dialog. [\#397](https://github.com/EventGhost/EventGhost/pull/397) ([kdschlosser](https://github.com/kdschlosser))
 * Fixes non functioning mouse in the ATI Remote Wonder II plugin [\#398](https://github.com/EventGhost/EventGhost/pull/398) ([kdschlosser](https://github.com/kdschlosser))
 * Broadcaster plugin bugfix [\#399](https://github.com/EventGhost/EventGhost/pull/399) ([kdschlosser](https://github.com/kdschlosser))
+* Fix appveyor and build scripts [\#430](https://github.com/EventGhost/EventGhost/pull/430) ([topic2k](https://github.com/topic2k))
 
 **Other changes:**
 
@@ -25,6 +26,7 @@
 * ConfigPanel missing EventHandler [\#392](https://github.com/EventGhost/EventGhost/pull/392) ([insane66613](https://github.com/insane66613))
 * copyright update. [\#403](https://github.com/EventGhost/EventGhost/pull/403) ([kdschlosser](https://github.com/kdschlosser))
 * Fixes Main prefix when triggering an event from the command line. [\#404](https://github.com/EventGhost/EventGhost/pull/404) ([kdschlosser](https://github.com/kdschlosser))
+* Fix appveyor and build scripts \(this time really\) [\#435](https://github.com/EventGhost/EventGhost/pull/435) ([topic2k](https://github.com/topic2k))
 
 
 ## [0.5.0-rc6](https://github.com/EventGhost/EventGhost/releases/tag/v0.5.0-rc6) (2018-12-24)
@@ -77,7 +79,7 @@
 **Enhancements:**
 
 * Changes XmlIdLink to eg.GUID \(see comment for more info\) [\#264](https://github.com/EventGhost/EventGhost/pull/264) ([kdschlosser](https://github.com/kdschlosser))
-  
+
   The use of XmlId made it difficult to share code that used 'Enable/Disable Action' or 'Exlusive Enable' (and others). Now with the use of GUID's this hurdle is gone.
 
   To turn it on you would open the add plugin dialog and left click once in the upper right hand corner of the dialog (client area) and then click once in the lower left hand corner of the dialog (client area). There is a 20x20 pixel target for each of the spots so the chance of someone doing this accidentally is probably not going to happen. But in the event it does, a message box asking if you want to enable or disable it pops up.

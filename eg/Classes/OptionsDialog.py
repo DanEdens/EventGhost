@@ -82,14 +82,14 @@ class OptionsDialog(eg.TaskletDialog):
             title=text.Title,
         )
 
-        locales = sorted(
-            (
-                locale for locale in Locale.EnumLocales()
-                if locale.iso_language == 'en' or locale.eg_has_language
-            ),
-            key=lambda lng: lng.language_name
-        )
-  
+        languageNames = eg.Translation.languageNames
+        languageList = ["en_US"]
+        for item in os.listdir(eg.languagesDir):
+            name, ext = os.path.splitext(item)
+            if ext == ".py" and name in languageNames:
+                languageList.append(name)
+        languageList.sort()
+        languageNameList = [languageNames[x] for x in languageList]
         notebook = wx.Notebook(self, -1)
         page1 = eg.Panel(notebook)
         notebook.AddPage(page1, text.Tab1)
@@ -184,17 +184,20 @@ class OptionsDialog(eg.TaskletDialog):
         datestampCtrl.Bind(wx.EVT_KILL_FOCUS, OnDatestampKillFocus)
 
         languageChoice = BitmapComboBox(page1, style=wx.CB_READONLY)
+        for name, code in zip(languageNameList, languageList):
+            filename = os.path.join(eg.imagesDir, "flags", "%s.png" % code)
+            if os.path.exists(filename):
+                image = wx.Image(filename)
+                image.Resize((16, 16), (0, 3))
+                bmp = image.ConvertToBitmap()
+                languageChoice.Append(name, bmp)
+            else:
+                languageChoice.Append(name)
 
-        for locale in locales:
-            languageChoice.Append(locale.label, locale.flag)
+        if config.language not in languageList:
+            config.language='en_EN'
 
-        for locale in locales:
-            if locale.iso_code == config.language:
-                languageChoice.SetSelection(locale.label)
-        else:
-            languageChoice.SetStringSelection('English - United States')
-            config.language = 'en_US'
-
+        languageChoice.SetSelection(languageList.index(config.language))
         languageChoice.SetMinSize((150, -1))
 
         buttonRow = eg.ButtonRow(self, (wx.ID_OK, wx.ID_CANCEL))
@@ -263,7 +266,7 @@ class OptionsDialog(eg.TaskletDialog):
             config.datestamp = datestampCtrl.GetValue()
 
             lang = languageChoice.GetStringSelection()
-            for locale in locales:
+            for locale in Locale.EnumLocales():
                 if locale.label == lang:
                     config.language = locale.iso_code
                     break
